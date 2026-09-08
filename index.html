@@ -1,0 +1,275 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Saikiran Chennuri — Data Governance &amp; Metadata Management</title>
+<meta name="description" content="Saikiran Chennuri, data governance and metadata management engineer in Hyderabad. Informatica EDC, Collibra, lineage architecture, and GDPR-driven cataloging across enterprise data estates.">
+<meta property="og:title" content="Saikiran Chennuri — Data Governance & Metadata Management">
+<meta property="og:description" content="Cataloging large estates, drawing lineage through them, and putting owners and rules on the data that matters.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;1,400&family=Manrope:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#F1F2EE; --panel:#E6E8E2; --ink:#1A2024; --ink-2:#4E575E; --ink-3:#848C93; --line:#CBD0CB;
+    --deep:#12302A; --deep-2:#1A3E36; --pale:#DCE6E0; --pale-2:#8FA79C; --brass:#C2A264;
+    --display:"Cormorant Garamond",Georgia,serif; --sans:"Manrope",system-ui,sans-serif;
+  }
+  *{box-sizing:border-box;margin:0}
+  html{scroll-behavior:smooth}
+  body{background:var(--bg);color:var(--ink);font-family:var(--sans);font-size:16px;line-height:1.65;-webkit-font-smoothing:antialiased}
+  a{color:inherit;text-decoration:none;border-bottom:1px solid var(--line);transition:border-color .15s,color .15s}
+  a:hover{border-bottom-color:var(--ink)}
+  :focus-visible{outline:2px solid var(--brass);outline-offset:3px}
+  .wrap{max-width:1140px;margin:0 auto;padding:0 32px}
+  @media(max-width:720px){.wrap{padding:0 20px}}
+
+  /* Dark hero band */
+  .band{background:var(--deep);color:var(--pale)}
+  .band a{border-color:rgba(220,230,224,.3)}
+  .band a:hover{border-color:var(--pale)}
+  header{display:flex;justify-content:space-between;align-items:center;padding:26px 0}
+  header .brand{font-family:var(--display);font-size:22px;font-weight:500}
+  header nav a{margin-left:26px;font-size:14px;font-weight:500;color:var(--pale-2);border:0}
+  header nav a:hover{color:var(--pale)}
+  @media(max-width:600px){header{flex-direction:column;align-items:flex-start;gap:10px;padding:22px 0}header nav a{margin:0 18px 0 0;font-size:13.5px}
+  .lineage .node text{font-size:13px}.lineage .node text.k{font-size:11px}.lineage .node.hub text{font-size:18px}.lineage .cap{font-size:11.5px}}
+
+  .hero{display:grid;grid-template-columns:1fr 1fr;gap:56px;align-items:center;padding:64px 0 72px}
+  .hero h1{font-family:var(--display);font-weight:400;font-size:clamp(44px,5.6vw,72px);line-height:1.02;letter-spacing:-.015em;max-width:13ch;color:#F4F6F2}
+  .hero h1 i{font-style:italic;color:var(--brass)}
+  .hero .lede{margin-top:26px;max-width:44ch;color:var(--pale);font-size:17px;opacity:.88}
+  .hero .cta{margin-top:30px;display:flex;gap:26px;align-items:center;font-size:14.5px;font-weight:500}
+  .hero .cta .primary{background:var(--brass);color:var(--deep);padding:11px 20px;border:0;border-radius:2px}
+  .hero .cta .primary:hover{background:#d4b478}
+  @media(max-width:860px){.hero{grid-template-columns:1fr;gap:40px;padding:48px 0 56px}}
+
+  /* Lineage art */
+  .lineage{width:100%;max-width:520px;justify-self:end}
+  .lineage svg{display:block;width:100%;height:auto;overflow:visible}
+  .lineage .edge{fill:none;stroke:var(--pale-2);stroke-width:1.4;stroke-dasharray:600;stroke-dashoffset:600;animation:draw 1.6s cubic-bezier(.4,0,.2,1) forwards}
+  .lineage .edge.b{stroke:var(--brass);stroke-width:1.8}
+  .lineage .node{opacity:0;animation:appear .6s ease forwards}
+  .lineage .node rect{fill:var(--deep-2);stroke:var(--pale-2);stroke-width:1}
+  .lineage .node.hub rect{fill:var(--deep-2);stroke:var(--brass);stroke-width:1.6}
+  .lineage .node text{font-family:var(--sans);font-size:11.5px;fill:var(--pale);font-weight:500}
+  .lineage .node text.k{font-size:9.5px;fill:var(--pale-2);font-weight:400}
+  .lineage .node.hub text{font-family:var(--display);font-size:16px;fill:#F4F6F2}
+  .lineage .cap{font-family:var(--sans);font-size:10px;fill:var(--pale-2);letter-spacing:.04em}
+  .n1{animation-delay:.05s}.n2{animation-delay:.15s}.n3{animation-delay:.25s}.n4{animation-delay:.35s}.n5{animation-delay:.45s}
+  .e1{animation-delay:.5s}.e2{animation-delay:.6s}.e3{animation-delay:.7s}.e4{animation-delay:.8s}.e5{animation-delay:.9s}
+  .hub{animation-delay:1.3s}.e6{animation-delay:1.7s}.e7{animation-delay:1.8s}.n7{animation-delay:2.2s}.n8{animation-delay:2.3s}
+  @keyframes draw{to{stroke-dashoffset:0}}
+  @keyframes appear{to{opacity:1}}
+  @media(prefers-reduced-motion:reduce){
+    html{scroll-behavior:auto}
+    .lineage .edge,.lineage .node{animation:none;opacity:1;stroke-dashoffset:0}
+  }
+
+  /* Record strip */
+  .strip{border-bottom:1px solid var(--line)}
+  .strip dl{display:grid;grid-template-columns:repeat(4,1fr);gap:0}
+  .strip dl>div{padding:22px 24px 22px 0;border-right:1px solid var(--line);margin-right:24px}
+  .strip dl>div:last-child{border:0;margin:0}
+  .strip dt{font-size:12.5px;color:var(--ink-3);font-weight:500}
+  .strip dd{font-family:var(--display);font-size:22px;font-weight:500;line-height:1.2;margin-top:4px}
+  @media(max-width:860px){.strip dl{grid-template-columns:1fr 1fr}.strip dl>div:nth-child(2){border:0;margin:0}}
+  @media(max-width:480px){.strip dl{grid-template-columns:1fr}.strip dl>div{border:0;margin:0;padding:14px 0;border-bottom:1px solid var(--line)}.strip dl>div:last-child{border:0}}
+
+  section{padding:76px 0;border-bottom:1px solid var(--line)}
+  .sec{display:grid;grid-template-columns:240px 1fr;gap:32px}
+  .sec h2{font-family:var(--display);font-weight:400;font-size:36px;line-height:1.05;letter-spacing:-.01em}
+  .sec .lead{color:var(--ink-3);font-size:14px;margin-top:10px;max-width:22ch}
+  @media(max-width:860px){.sec{grid-template-columns:1fr;gap:20px}.sec .lead{max-width:none}section{padding:56px 0}}
+
+  /* Experience */
+  .roles{border-left:1px solid var(--line);margin-left:6px}
+  .role{position:relative;padding:0 0 46px 34px;max-width:64ch}
+  .role:last-child{padding-bottom:0}
+  .role::before{content:"";position:absolute;left:-6px;top:9px;width:11px;height:11px;border-radius:50%;background:var(--bg);border:1.5px solid var(--deep)}
+  .role.now::before{background:var(--deep)}
+  .role .when{color:var(--ink-3);font-size:13.5px;font-weight:500}
+  .role h3{font-family:var(--display);font-weight:500;font-size:28px;line-height:1.15;margin-top:4px}
+  .role .org{color:var(--ink-2);font-size:14.5px;margin:4px 0 12px}
+  .role p+p{margin-top:8px}
+  .metrics{display:flex;gap:30px;flex-wrap:wrap;margin-top:18px;padding-top:14px;border-top:1px solid var(--line)}
+  .metrics div{font-size:13px;color:var(--ink-2)}
+  .metrics b{display:block;font-family:var(--display);font-weight:500;font-size:27px;color:var(--ink);line-height:1.1}
+
+  /* Principles */
+  .principles{display:grid;grid-template-columns:repeat(3,1fr);gap:36px}
+  .principles h3{font-family:var(--display);font-weight:500;font-size:24px;line-height:1.15;margin-bottom:8px}
+  .principles p{color:var(--ink-2);font-size:15.5px}
+  @media(max-width:760px){.principles{grid-template-columns:1fr;gap:26px}}
+
+  /* Capabilities */
+  .caps{display:grid;grid-template-columns:repeat(2,1fr);gap:36px 40px}
+  .cap h3{font-family:var(--display);font-weight:500;font-size:23px;margin-bottom:8px}
+  .cap p{color:var(--ink-2);font-size:15.5px;max-width:42ch}
+  .cap.frontier{grid-column:1/-1;padding:22px 26px;background:var(--panel);border-left:2px solid var(--deep)}
+  .cap.frontier p{max-width:72ch}
+  @media(max-width:640px){.caps{grid-template-columns:1fr}}
+
+  /* Contact */
+  .contact p{max-width:48ch;color:var(--ink-2)}
+  .contact .links{margin-top:22px;display:flex;gap:28px;flex-wrap:wrap;font-size:17px}
+  .contact .links a{border-color:var(--brass)}
+  footer{padding:28px 0 52px;display:flex;justify-content:space-between;flex-wrap:wrap;gap:8px;color:var(--ink-3);font-size:13.5px}
+</style>
+</head>
+<body>
+
+<div class="band">
+  <div class="wrap">
+    <header>
+      <div class="brand">Saikiran Chennuri</div>
+      <nav><a href="#experience">Experience</a><a href="#approach">Approach</a><a href="#capabilities">Capabilities</a><a href="#contact">Contact</a></nav>
+    </header>
+
+    <div class="hero">
+      <div>
+        <h1>Data you can trace, name, and <i>answer for.</i></h1>
+        <p class="lede">I work in data governance and metadata management: cataloging large estates, drawing lineage through them, and putting owners and rules on the data that regulators and decision-makers depend on. Seven years across warehouses, catalogs, and now a bank's operations.</p>
+        <div class="cta">
+          <a class="primary" href="#experience">See the work</a>
+          <a href="mailto:hello@psychrun.com">Get in touch</a>
+        </div>
+      </div>
+
+      <div class="lineage" aria-label="Lineage diagram: source systems flow into a catalog, which feeds a business glossary and named owners">
+        <svg viewBox="0 0 520 330" xmlns="http://www.w3.org/2000/svg" role="img">
+          <text class="cap" x="0" y="14">SOURCES</text>
+          <text class="cap" x="205" y="14">CATALOG</text>
+          <text class="cap" x="392" y="14">GOVERNANCE</text>
+
+          <g class="node n1"><rect x="0" y="30" width="128" height="40" rx="3"/><text x="12" y="47">Oracle</text><text class="k" x="12" y="61">actuarial, finance</text></g>
+          <g class="node n2"><rect x="0" y="86" width="128" height="40" rx="3"/><text x="12" y="103">SQL Server</text><text class="k" x="12" y="117">policy, claims</text></g>
+          <g class="node n3"><rect x="0" y="142" width="128" height="40" rx="3"/><text x="12" y="159">Teradata</text><text class="k" x="12" y="173">legacy warehouse</text></g>
+          <g class="node n4"><rect x="0" y="198" width="128" height="40" rx="3"/><text x="12" y="215">Azure ADLS</text><text class="k" x="12" y="229">data lake</text></g>
+          <g class="node n5"><rect x="0" y="254" width="128" height="40" rx="3"/><text x="12" y="271">PowerCenter</text><text class="k" x="12" y="285">ETL lineage</text></g>
+
+          <path class="edge e1" d="M128 50 C 175 50, 160 162, 205 162"/>
+          <path class="edge e2" d="M128 106 C 175 106, 160 162, 205 162"/>
+          <path class="edge e3" d="M128 162 L 205 162"/>
+          <path class="edge e4" d="M128 218 C 175 218, 160 162, 205 162"/>
+          <path class="edge e5" d="M128 274 C 175 274, 160 162, 205 162"/>
+
+          <g class="node hub"><rect x="205" y="128" width="130" height="68" rx="3"/><text x="222" y="158">Enterprise</text><text x="222" y="178">Data Catalog</text></g>
+
+          <path class="edge b e6" d="M335 162 C 372 162, 355 106, 392 106"/>
+          <path class="edge b e7" d="M335 162 C 372 162, 355 218, 392 218"/>
+
+          <g class="node n7"><rect x="392" y="86" width="128" height="40" rx="3"/><text x="404" y="103">Business glossary</text><text class="k" x="404" y="117">terms, CDEs, rules</text></g>
+          <g class="node n8"><rect x="392" y="198" width="128" height="40" rx="3"/><text x="404" y="215">Data owners</text><text class="k" x="404" y="229">accountable, named</text></g>
+
+          <text class="cap" x="0" y="325">A simplified view of the estate I catalogued at TCS</text>
+        </svg>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="strip">
+  <div class="wrap">
+    <dl>
+      <div><dt>Currently</dt><dd>Data Owner</dd></div>
+      <div><dt>With</dt><dd>Mphasis, embedded at a global bank</dd></div>
+      <div><dt>Platforms</dt><dd>Informatica EDC, Collibra</dd></div>
+      <div><dt>Based in</dt><dd>Hyderabad, India</dd></div>
+    </dl>
+  </div>
+</div>
+
+<div class="wrap">
+
+<section id="experience">
+  <div class="sec">
+    <div><h2>Experience</h2><p class="lead">Three roles, one arc: from running warehouses to governing what they hold.</p></div>
+    <div class="roles">
+
+      <div class="role now">
+        <div class="when">August 2026 – present</div>
+        <h3>Data Owner</h3>
+        <div class="org">Mphasis, deployed to a global bank's consumer operations division, Hyderabad</div>
+        <p>Ownership of operational data domains: defining critical data elements, maintaining the business glossary, and keeping lineage and control evidence current for governance forums and regulatory review.</p>
+      </div>
+
+      <div class="role">
+        <div class="when">October 2022 – May 2026</div>
+        <h3>Lead EDC Developer</h3>
+        <div class="org">Tata Consultancy Services, pan-European insurance client</div>
+        <p>Led Informatica Enterprise Data Catalog delivery on a GDPR-driven governance program spanning ten countries. Owned catalog administration, resource and connection configuration, remote-agent scanning across regions, profiling and data-domain discovery, and the REST integration that carried curated metadata into Collibra for enterprise stewardship.</p>
+        <p>Closed the engagement as L2 support and migration liaison for the client's OBIEE reporting estate.</p>
+        <div class="metrics">
+          <div><b>12M</b>metadata assets</div>
+          <div><b>700</b>source systems</div>
+          <div><b>10</b>countries</div>
+          <div><b>9</b>database technologies</div>
+        </div>
+      </div>
+
+      <div class="role">
+        <div class="when">2018 – 2022</div>
+        <h3>Data Warehouse Operations</h3>
+        <div class="org">Cognizant</div>
+        <p>Operational delivery on Teradata and Informatica PowerCenter: load monitoring, incident handling, and change support for enterprise warehouse pipelines. The years that taught me what breaks when nobody owns the data.</p>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<section id="approach">
+  <div class="sec">
+    <div><h2>Approach</h2><p class="lead">Three habits that have held up across every estate.</p></div>
+    <div class="principles">
+      <div>
+        <h3>Lineage before dashboards</h3>
+        <p>A report nobody can trace is an opinion with a chart. I start from where the data enters and work forward, so every number downstream has a path back.</p>
+      </div>
+      <div>
+        <h3>Owners, not custodians</h3>
+        <p>Governance fails quietly when everyone is responsible and no one is accountable. I push for a named owner on every critical element, with the authority to say no.</p>
+      </div>
+      <div>
+        <h3>State the edge of the map</h3>
+        <p>I bound what I know precisely and name what I don't. It has cost me nothing in interviews and saved me plenty in delivery.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="capabilities">
+  <div class="sec">
+    <div><h2>Capabilities</h2><p class="lead">What I can be handed, and what I'm still earning.</p></div>
+    <div class="caps">
+      <div class="cap"><h3>Catalog administration</h3><p>Informatica EDC end to end: catalog, analyst, model repository, scanning and profiling services; resource design, permissions, and remote agents across regions.</p></div>
+      <div class="cap"><h3>Lineage architecture</h3><p>Column-level lineage through ETL layers, and defensible manual lineage for legacy platforms that no scanner reads.</p></div>
+      <div class="cap"><h3>Governance frameworks</h3><p>Critical data element identification, business glossary ownership, data-domain rules and curation workflows, GDPR and data-residency design across jurisdictions.</p></div>
+      <div class="cap"><h3>Platforms</h3><p>Oracle, SQL Server, Teradata, PostgreSQL, SAP HANA, DB2 for i, Azure ADLS and Synapse. Collibra as power user and REST integrator. PowerCenter, IDQ, SQL.</p></div>
+      <div class="cap frontier"><h3>Still building</h3><p>Deep Collibra platform administration, Informatica CDGC, and cloud warehousing on Snowflake and AWS. I would rather state the edge of my map than let a skills list imply otherwise.</p></div>
+    </div>
+  </div>
+</section>
+
+<section id="contact" class="contact" style="border:0">
+  <div class="sec">
+    <div><h2>Contact</h2></div>
+    <div>
+      <p>Open to conversations about catalog implementations, lineage, and the practical side of governing data at scale.</p>
+      <div class="links">
+        <a href="mailto:hello@psychrun.com">hello@psychrun.com</a>
+        <a href="https://www.linkedin.com/in/PSYCHRUN" rel="me">LinkedIn</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <span>Saikiran Chennuri, Hyderabad</span>
+  <span>psychrun.com</span>
+</footer>
+
+</div>
+</body>
+</html>
