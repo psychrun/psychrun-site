@@ -5,6 +5,20 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Saikiran Chennuri — Data Governance &amp; Metadata Management</title>
 <meta name="description" content="Saikiran Chennuri, data governance and metadata management engineer in Hyderabad. Informatica EDC, Collibra, lineage architecture, and GDPR-driven cataloging across enterprise data estates.">
+<link rel="canonical" href="https://psychrun.com/">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<meta name="theme-color" content="#12302A">
+<meta name="author" content="Saikiran Chennuri">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://psychrun.com/">
+<meta property="og:image" content="https://psychrun.com/og-image.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Saikiran Chennuri — Data Governance & Metadata Management">
+<meta name="twitter:description" content="Cataloging large estates, drawing lineage through them, and putting owners and rules on the data that matters.">
+<meta name="twitter:image" content="https://psychrun.com/og-image.png">
 <meta property="og:title" content="Saikiran Chennuri — Data Governance & Metadata Management">
 <meta property="og:description" content="Cataloging large estates, drawing lineage through them, and putting owners and rules on the data that matters.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -36,6 +50,7 @@
   .lineage .node text{font-size:13px}.lineage .node text.k{font-size:11px}.lineage .node.hub text{font-size:18px}.lineage .cap{font-size:11.5px}}
 
   .hero{display:grid;grid-template-columns:1fr 1fr;gap:56px;align-items:center;padding:64px 0 72px}
+  .hero .portrait{width:76px;height:76px;border-radius:50%;object-fit:cover;display:block;margin-bottom:26px;border:2px solid rgba(194,162,100,.55);box-shadow:0 0 0 6px rgba(143,167,156,.12)}
   .hero h1{font-family:var(--display);font-weight:400;font-size:clamp(44px,5.6vw,72px);line-height:1.02;letter-spacing:-.015em;max-width:13ch;color:#F4F6F2}
   .hero h1 i{font-style:italic;color:var(--brass)}
   .hero .lede{margin-top:26px;max-width:44ch;color:var(--pale);font-size:17px;opacity:.88}
@@ -96,6 +111,22 @@
   .metrics div{font-size:13px;color:var(--ink-2)}
   .metrics b{display:block;font-family:var(--display);font-weight:500;font-size:27px;color:var(--ink);line-height:1.1}
 
+  .role ul{list-style:none;padding:0;margin:12px 0 0}
+  .role li{position:relative;padding-left:18px;margin-bottom:7px;font-size:15px;color:var(--ink-2)}
+  .role li::before{content:"";position:absolute;left:0;top:10px;width:8px;height:1px;background:var(--brass)}
+  .role .client{color:var(--ink-3)}
+
+  /* Credentials */
+  .creds{display:grid;grid-template-columns:1.2fr 1fr;gap:36px 48px}
+  .creds h3{font-family:var(--display);font-weight:500;font-size:23px;margin-bottom:10px}
+  .creds ul{list-style:none;padding:0}
+  .creds li{padding:9px 0;border-top:1px solid var(--line);font-size:15px;color:var(--ink-2)}
+  .creds li:last-child{border-bottom:1px solid var(--line)}
+  .creds li span{display:block;font-size:13px;color:var(--ink-3);margin-top:1px}
+  .creds p{color:var(--ink-2);font-size:15.5px;max-width:42ch}
+  .creds .block+.block{margin-top:30px}
+  @media(max-width:760px){.creds{grid-template-columns:1fr;gap:28px}}
+
   /* Principles */
   .principles{display:grid;grid-template-columns:repeat(3,1fr);gap:36px}
   .principles h3{font-family:var(--display);font-weight:500;font-size:24px;line-height:1.15;margin-bottom:8px}
@@ -116,6 +147,26 @@
   .contact .links a{border-color:var(--brass)}
   footer{padding:28px 0 52px;display:flex;justify-content:space-between;flex-wrap:wrap;gap:8px;color:var(--ink-3);font-size:13.5px}
 </style>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Person",
+  "name": "Saikiran Chennuri",
+  "url": "https://psychrun.com/",
+  "image": "https://psychrun.com/portrait.jpg",
+  "jobTitle": "Data Owner",
+  "worksFor": {"@type": "Organization", "name": "Mphasis"},
+  "address": {"@type": "PostalAddress", "addressLocality": "Hyderabad", "addressCountry": "IN"},
+  "email": "mailto:hello@psychrun.com",
+  "sameAs": ["https://www.linkedin.com/in/PSYCHRUN"],
+  "knowsAbout": ["Data governance", "Metadata management", "Informatica Enterprise Data Catalog", "Collibra", "Data lineage", "GDPR"]
+}
+</script>
+<!-- Analytics: GoatCounter (free, no cookies, no consent banner needed).
+     1. Sign up at https://www.goatcounter.com and pick a code, e.g. "psychrun".
+     2. Replace YOURCODE below with it, then remove the comment markers on the line above and the line below the script tag.
+<script data-goatcounter="https://YOURCODE.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
+-->
 </head>
 <body>
 
@@ -123,11 +174,12 @@
   <div class="wrap">
     <header>
       <div class="brand">Saikiran Chennuri</div>
-      <nav><a href="#experience">Experience</a><a href="#approach">Approach</a><a href="#capabilities">Capabilities</a><a href="#contact">Contact</a></nav>
+      <nav><a href="#experience">Experience</a><a href="#approach">Approach</a><a href="#capabilities">Capabilities</a><a href="#credentials">Credentials</a><a href="#contact">Contact</a></nav>
     </header>
 
     <div class="hero">
       <div>
+        <img class="portrait" src="portrait.jpg" alt="Saikiran Chennuri" width="76" height="76">
         <h1>Data you can trace, name, and <i>answer for.</i></h1>
         <p class="lede">I work in data governance and metadata management: cataloging large estates, drawing lineage through them, and putting owners and rules on the data that regulators and decision-makers depend on. Seven years across warehouses, catalogs, and now a bank's operations.</p>
         <div class="cta">
@@ -184,22 +236,29 @@
 
 <section id="experience">
   <div class="sec">
-    <div><h2>Experience</h2><p class="lead">Three roles, one arc: from running warehouses to governing what they hold.</p></div>
+    <div><h2>Experience</h2><p class="lead">Four roles, one arc: from running warehouses to governing what they hold.</p></div>
     <div class="roles">
 
       <div class="role now">
         <div class="when">August 2026 – present</div>
         <h3>Data Owner</h3>
-        <div class="org">Mphasis, deployed to a global bank's consumer operations division, Hyderabad</div>
-        <p>Ownership of operational data domains: defining critical data elements, maintaining the business glossary, and keeping lineage and control evidence current for governance forums and regulatory review.</p>
+        <div class="org">Mphasis &middot; <span class="client">deployed to a global bank's consumer operations division, Hyderabad</span></div>
+        <p>Ownership of operational data domains: defining critical data elements, maintaining the business glossary, and keeping lineage and control evidence current for governance forums and regulatory review. Informatica EDC and Collibra are the tooling.</p>
       </div>
 
       <div class="role">
         <div class="when">October 2022 – May 2026</div>
         <h3>Lead EDC Developer</h3>
-        <div class="org">Tata Consultancy Services, pan-European insurance client</div>
-        <p>Led Informatica Enterprise Data Catalog delivery on a GDPR-driven governance program spanning ten countries. Owned catalog administration, resource and connection configuration, remote-agent scanning across regions, profiling and data-domain discovery, and the REST integration that carried curated metadata into Collibra for enterprise stewardship.</p>
-        <p>Closed the engagement as L2 support and migration liaison for the client's OBIEE reporting estate.</p>
+        <div class="org">Tata Consultancy Services &middot; <span class="client">pan-European insurance group, GDPR governance program</span></div>
+        <p>Led Informatica Enterprise Data Catalog delivery across ten countries: catalog administration, resource and connection design, remote-agent scanning across regions, profiling, and data-domain discovery, with curated metadata flowing into Collibra for enterprise stewardship.</p>
+        <ul>
+          <li>Built custom mapplets with regex-based data-domain rules that classified sensitive columns automatically for GDPR reporting.</li>
+          <li>Reworked the scanning strategy for the heaviest databases, cutting scan time from 6–8 hours to 1–2.</li>
+          <li>Onboarded Azure SQL Data Warehouse as a cloud resource in EDC to meet EU residency requirements, an out-of-scope request delivered on priority.</li>
+          <li>Ran the EDC-to-Collibra REST integration as power user, from metadata pushes to debugging the early issues.</li>
+          <li>Stayed on as the team wound down from six to one, running the catalog end to end until project sunset: development, deployment, support, and every stakeholder conversation. The hardest stretch of the program, and the one that taught me to operate rather than contribute.</li>
+          <li>Closed the engagement as L2 support and migration liaison for the client's OBIEE reporting estate.</li>
+        </ul>
         <div class="metrics">
           <div><b>12M</b>metadata assets</div>
           <div><b>700</b>source systems</div>
@@ -209,10 +268,26 @@
       </div>
 
       <div class="role">
-        <div class="when">2018 – 2022</div>
-        <h3>Data Warehouse Operations</h3>
-        <div class="org">Cognizant</div>
-        <p>Operational delivery on Teradata and Informatica PowerCenter: load monitoring, incident handling, and change support for enterprise warehouse pipelines. The years that taught me what breaks when nobody owns the data.</p>
+        <div class="when">June 2021 – September 2022</div>
+        <h3>Senior System Analyst, Operations Lead</h3>
+        <div class="org">Cognizant &middot; <span class="client">vehicle manufacturer, Teradata data warehouse</span></div>
+        <p>Led a 12–15 member operations team covering system health, batch execution, database administration, and deployments for a Teradata warehouse fed by Informatica PowerCenter.</p>
+        <ul>
+          <li>Raised batch SLA from 70% to 98% within three months through parameter optimisation, query tuning, and process fixes.</li>
+          <li>Led three migrations: two PowerCenter upgrades (9.x to 10.x) and an on-premise move to Teradata Cloud and Informatica Cloud, completed in three days against a five-day plan.</li>
+          <li>Introduced ServiceNow alert automation that reduced SLA misses and escalations; represented the team in daily Scrum and executed critical batch releases personally.</li>
+        </ul>
+      </div>
+
+      <div class="role">
+        <div class="when">July 2018 – June 2021</div>
+        <h3>Programmer Analyst Trainee, then System Analyst</h3>
+        <div class="org">Cognizant &middot; <span class="client">UK banking institution</span></div>
+        <p>The first project, and still the foundation. Application and production support for banking systems on Unix and Oracle: batch jobs, server maintenance, uptime monitoring, incident troubleshooting, and user provisioning across Ab Initio and PowerCenter.</p>
+        <ul>
+          <li>Became the team's cross-functional resource across all three project domains, deployed by management on high-priority issues.</li>
+          <li>Resolved a major escalation by bringing every stakeholder into one thread and clearing a mismatch between what users expected and what they had requested.</li>
+        </ul>
       </div>
 
     </div>
@@ -252,6 +327,40 @@
   </div>
 </section>
 
+<section id="credentials">
+  <div class="sec">
+    <div><h2>Credentials</h2><p class="lead">The formal side, kept short.</p></div>
+    <div class="creds">
+      <div class="block">
+        <h3>Certifications</h3>
+        <ul>
+          <li>Enterprise Data Catalog: Configuration and Maintenance<span>Informatica, 2022</span></li>
+          <li>Enterprise Data Catalog: Data Discovery and Lineage Analysis<span>Informatica, 2022</span></li>
+          <li>ITIL Foundation<span>2023</span></li>
+          <li>SAFe 6 Practitioner<span>Scaled Agile, 2023; lapsed 2024</span></li>
+          <li>The Complete Prompt Engineering for AI Bootcamp<span>Udemy, 2024</span></li>
+          <li>Career Essentials in Data Analysis<span>Microsoft and LinkedIn, 2025</span></li>
+        </ul>
+        <p style="margin-top:12px;font-size:14px;color:var(--ink-3)">Plus forty-odd shorter courses across data, cloud, and business analysis, listed on LinkedIn.</p>
+      </div>
+      <div>
+        <div class="block">
+          <h3>Recognition</h3>
+          <p>Multiple awards across TCS and Cognizant, including the Special Initiative Award, a Certificate of Recognition for outstanding contribution to project deliverables, and the Silver Award.</p>
+        </div>
+        <div class="block">
+          <h3>Education</h3>
+          <p>B.Tech in Electrical and Electronics Engineering<br>BV Raju Institute of Technology, 2012–2016</p>
+        </div>
+        <div class="block">
+          <h3>Languages</h3>
+          <p>English, Telugu, Hindi</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
 <section id="contact" class="contact" style="border:0">
   <div class="sec">
     <div><h2>Contact</h2></div>
@@ -259,7 +368,7 @@
       <p>Open to conversations about catalog implementations, lineage, and the practical side of governing data at scale.</p>
       <div class="links">
         <a href="mailto:hello@psychrun.com">hello@psychrun.com</a>
-        <a href="https://www.linkedin.com/in/PSYCHRUN" rel="me">LinkedIn</a>
+        <a href="https://www.linkedin.com/in/YOUR-HANDLE" rel="me">LinkedIn</a>
       </div>
     </div>
   </div>
