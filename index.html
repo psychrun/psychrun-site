@@ -46,7 +46,7 @@
   header .brand{font-family:var(--display);font-size:22px;font-weight:500}
   header nav a{margin-left:26px;font-size:14px;font-weight:500;color:var(--pale-2);border:0}
   header nav a:hover{color:var(--pale)}
-  @media(max-width:600px){header{flex-direction:column;align-items:flex-start;gap:10px;padding:22px 0}header nav a{margin:0 18px 0 0;font-size:13.5px}
+  @media(max-width:600px){header{flex-direction:column;align-items:flex-start;gap:10px;padding:22px 0}header nav{display:flex;flex-wrap:wrap;gap:6px 16px}header nav a{margin:0;font-size:13.5px}
   .lineage .node text{font-size:13px}.lineage .node text.k{font-size:11px}.lineage .node.hub text{font-size:18px}.lineage .cap{font-size:11.5px}}
 
   .hero{display:grid;grid-template-columns:1fr 1fr;gap:56px;align-items:center;padding:64px 0 72px}
@@ -137,8 +137,6 @@
   .caps{display:grid;grid-template-columns:repeat(2,1fr);gap:36px 40px}
   .cap h3{font-family:var(--display);font-weight:500;font-size:23px;margin-bottom:8px}
   .cap p{color:var(--ink-2);font-size:15.5px;max-width:42ch}
-  .cap.frontier{grid-column:1/-1;padding:22px 26px;background:var(--panel);border-left:2px solid var(--deep)}
-  .cap.frontier p{max-width:72ch}
   @media(max-width:640px){.caps{grid-template-columns:1fr}}
 
   /* Contact */
@@ -323,13 +321,12 @@
 
 <section id="capabilities">
   <div class="sec">
-    <div><h2>Capabilities</h2><p class="lead">What I can be handed, and what I'm still earning.</p></div>
+    <div><h2>Capabilities</h2><p class="lead">What I can be handed, end to end.</p></div>
     <div class="caps">
       <div class="cap"><h3>Catalog administration</h3><p>Informatica EDC end to end: catalog, analyst, model repository, scanning and profiling services; resource design, permissions, and remote agents across regions.</p></div>
       <div class="cap"><h3>Lineage architecture</h3><p>Column-level lineage through ETL layers, and defensible manual lineage for legacy platforms that no scanner reads.</p></div>
       <div class="cap"><h3>Governance frameworks</h3><p>Critical data element identification, business glossary ownership, data-domain rules and curation workflows, GDPR and data-residency design across jurisdictions.</p></div>
       <div class="cap"><h3>Platforms</h3><p>Oracle, SQL Server, Teradata, PostgreSQL, SAP HANA, DB2 for i, Azure ADLS and Synapse. Collibra as power user and REST integrator. PowerCenter, IDQ, SQL.</p></div>
-      <div class="cap frontier"><h3>Still building</h3><p>Deep Collibra platform administration and Informatica CDGC. Newer in daily use: DataHub as a catalog and Snowflake for analysis, where I'm working past query-level toward platform depth. AWS is still ahead. I would rather state the edge of my map than let a skills list imply otherwise.</p></div>
     </div>
   </div>
 </section>
