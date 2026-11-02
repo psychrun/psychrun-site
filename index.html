@@ -86,6 +86,40 @@
     .scene *{animation:none!important}.scene .cline{stroke-dashoffset:0}.scene .seeker{opacity:1}
   }
 
+  /* Live Hyderabad sky: scripts set --day (0 night .. 1 day) and --warm (0 .. 1 at sunrise/sunset) */
+  .scene{--day:0;--warm:0}
+  .scene .sky-day{opacity:var(--day);transition:opacity 2s ease}
+  .scene .sky-warm{opacity:var(--warm);transition:opacity 2s ease}
+  .scene .night{opacity:calc((1 - var(--day)) * (1 - var(--warm) * .55));transition:opacity 2s ease}
+  .scene .moon{opacity:calc(1 - max(var(--day), var(--warm)));transition:opacity 2s ease}
+  .scene .sun{opacity:max(var(--day), var(--warm));transition:opacity 2s ease,transform 2s ease}
+  .scene .sky-time{display:block;margin-top:6px;font-family:var(--sans);font-style:normal;font-size:12.5px;letter-spacing:.02em;color:var(--pale-2);opacity:.85;min-height:1.4em}
+  @media(prefers-reduced-motion:reduce){.scene .sky-day,.scene .sky-warm,.scene .night,.scene .moon,.scene .sun{transition:none}}
+
+  /* Daytime: the hero band turns light lavender */
+  .band{transition:background-color 1.6s ease,color 1.6s ease}
+  .band header .brand,.band header nav a,.hero h1,.hero .lede,.band .scene figcaption{transition:color 1.6s ease}
+  html[data-sky="day"] .band{background:#ECE7F6;color:#2B2640}
+  html[data-sky="day"] .band a{border-color:rgba(43,38,64,.28)}
+  html[data-sky="day"] .band a:hover{border-color:#2B2640}
+  html[data-sky="day"] header nav a{color:#5E5778}
+  html[data-sky="day"] header nav a:hover{color:#2B2640}
+  html[data-sky="day"] .hero h1{color:#2B2640}
+  html[data-sky="day"] .hero h1 i{color:#8A6A2E}
+  html[data-sky="day"] .hero .lede{color:#3F3957;opacity:1}
+  html[data-sky="day"] .hero .portrait{border-color:rgba(138,106,46,.55);box-shadow:0 0 0 6px rgba(120,100,170,.14)}
+  html[data-sky="day"] .scene figcaption,html[data-sky="day"] .scene .sky-time{color:#5E5778}
+  .scene path[fill="#17392F"],.scene path[fill="#0D2520"]{transition:fill 1.6s ease}
+  html[data-sky="day"] .scene path[fill="#17392F"]{fill:#CFC6E6}
+  html[data-sky="day"] .scene path[fill="#0D2520"]{fill:#B4A9D2}
+  html[data-sky="day"] .scene .trail{stroke:#6E6590}
+  /* The Keeper and the travellers wear midnight indigo by day */
+  .scene .wizard path[fill="#1A3E36"],.scene .seeker path[fill="#336B5D"],.scene .seeker line{transition:fill 1.6s ease,stroke 1.6s ease}
+  html[data-sky="day"] .scene .wizard path[fill="#1A3E36"]{fill:#2C3566;stroke:#A3ACD9;stroke-opacity:.8}
+  html[data-sky="day"] .scene .seeker path[fill="#336B5D"]{fill:#5B67A3}
+  html[data-sky="day"] .scene .seeker line{stroke:#5B67A3}
+  @media(prefers-reduced-motion:reduce){.band,.band *{transition:none!important}}
+
   /* Record strip */
   .strip{border-bottom:1px solid var(--line)}
   .strip dl{display:grid;grid-template-columns:repeat(4,1fr);gap:0}
@@ -165,11 +199,6 @@
   "knowsAbout": ["Data governance", "Metadata management", "Informatica Enterprise Data Catalog", "Collibra", "Data lineage", "GDPR", "Data ownership", "Data quality", "Data remediation"]
 }
 </script>
-<!-- Analytics: GoatCounter (free, no cookies, no consent banner needed).
-     1. Sign up at https://www.goatcounter.com and pick a code, e.g. "psychrun".
-     2. Replace YOURCODE below with it, then remove the comment markers on the line above and the line below the script tag.
-<script data-goatcounter="https://YOURCODE.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
--->
 </head>
 <body>
 
@@ -202,7 +231,22 @@
         <linearGradient id="mh" x1="0" x2="1"><stop offset="0" stop-color="#000"/><stop offset=".12" stop-color="#fff"/><stop offset=".88" stop-color="#fff"/><stop offset="1" stop-color="#000"/></linearGradient>
         <linearGradient id="mv" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#000" stop-opacity="0"/><stop offset="1" stop-color="#000"/></linearGradient>
         <mask id="fade" maskUnits="userSpaceOnUse" x="0" y="0" width="520" height="380"><rect width="520" height="380" fill="url(#mh)"/><rect y="336" width="520" height="44" fill="url(#mv)"/></mask>
+        <linearGradient id="sky-day-g" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#A99BD4"/><stop offset=".6" stop-color="#CEC4EA"/><stop offset="1" stop-color="#E9E3F5"/></linearGradient>
+        <linearGradient id="sky-warm-g" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#1E3F47" stop-opacity="0"/><stop offset=".35" stop-color="#5C5560"/><stop offset=".7" stop-color="#C08466"/><stop offset="1" stop-color="#E9BC7C"/></linearGradient>
+        <radialGradient id="sky-fade-g" cx=".5" cy=".6" r=".52"><stop offset=".35" stop-color="#fff"/><stop offset="1" stop-color="#000"/></radialGradient>
+        <linearGradient id="sky-vfade-g" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#000"/><stop offset=".22" stop-color="#fff"/><stop offset=".7" stop-color="#fff"/><stop offset=".86" stop-color="#000"/></linearGradient>
+        <mask id="sky-fade" maskUnits="userSpaceOnUse" x="0" y="0" width="520" height="380"><rect width="520" height="380" fill="url(#sky-fade-g)"/></mask>
+        <mask id="sky-vfade" maskUnits="userSpaceOnUse" x="0" y="0" width="520" height="380"><rect width="520" height="380" fill="url(#sky-vfade-g)"/></mask>
+        <radialGradient id="g-sun"><stop offset="0" stop-color="#FFF1C7" stop-opacity=".95"/><stop offset=".35" stop-color="#F1CF86" stop-opacity=".45"/><stop offset="1" stop-color="#E9BC7C" stop-opacity="0"/></radialGradient>
+        <mask id="moon-bite" maskUnits="userSpaceOnUse" x="440" y="30" width="60" height="60"><rect x="440" y="30" width="60" height="60" fill="#fff"/><circle cx="476" cy="52" r="14" fill="#000"/></mask>
         </defs>
+        <g class="sky" mask="url(#sky-fade)" aria-hidden="true"><g mask="url(#sky-vfade)">
+        <rect class="sky-day" width="520" height="380" fill="url(#sky-day-g)"/>
+        <rect class="sky-warm" width="520" height="380" fill="url(#sky-warm-g)"/>
+        </g>
+        </g>
+        <g class="sun" transform="translate(440 268)" aria-hidden="true"><circle r="46" fill="url(#g-sun)"/><circle r="13" fill="#FBEBC0"/></g>
+        <g class="night">
         <circle class="star" cx="170.5" cy="38.5" r="0.8" style="animation-delay:0.3s;animation-duration:3.8s"/>
         <circle class="star" cx="191.8" cy="19.7" r="1" style="animation-delay:0.1s;animation-duration:3.6s"/>
         <circle class="star" cx="41.5" cy="26.3" r="1.4" style="animation-delay:0.2s;animation-duration:3.9s"/>
@@ -248,7 +292,8 @@
         <circle class="cstar" cx="180" cy="50" r="2"/>
         <circle class="cstar" cx="226" cy="90" r="2"/>
         <circle class="cstar" cx="152" cy="118" r="2"/>
-        <g class="moon"><circle cx="468" cy="58" r="16" fill="#E9DFC6"/><circle cx="476" cy="52" r="14" fill="#12302A"/></g>
+        </g>
+        <g class="moon"><circle cx="468" cy="58" r="16" fill="#E9DFC6" mask="url(#moon-bite)"/></g>
         <g mask="url(#fade)">
         <path d="M0 300 C 80 268 160 286 240 276 C 330 266 420 246 520 260 L520 380 L0 380Z" fill="#17392F"/>
         </g>
@@ -279,7 +324,7 @@
         <g class="seeker" style="animation-delay:1.25s" transform="translate(202.0 338.8) scale(1.35)"><path d="M-7 0 L-4 -17 C -4 -26, 4 -26, 4 -17 L7 0 Z" fill="#336B5D"/><line x1="5" y1="-13" x2="10" y2="-9" stroke="#336B5D" stroke-width="2" stroke-linecap="round"/><circle class="lamp" cx="11" cy="-7" r="7" fill="url(#g-lamp)" style="animation-delay:0.6s"/><circle cx="11" cy="-7" r="1.8" fill="#F1DDAE"/></g>
         <g class="seeker" style="animation-delay:1.60s" transform="translate(303.1 320.5) scale(1.15)"><path d="M-7 0 L-4 -17 C -4 -26, 4 -26, 4 -17 L7 0 Z" fill="#336B5D"/><line x1="5" y1="-13" x2="10" y2="-9" stroke="#336B5D" stroke-width="2" stroke-linecap="round"/><circle class="lamp" cx="11" cy="-7" r="7" fill="url(#g-lamp)" style="animation-delay:1.2s"/><circle cx="11" cy="-7" r="1.8" fill="#F1DDAE"/></g>
         </svg>
-        <figcaption>Ask the Keeper. He answers only what the stars can trace.</figcaption>
+        <figcaption>Ask the Keeper. He answers only what the stars can trace.<span class="sky-time" id="sky-time" aria-live="off"></span></figcaption>
       </figure>
     </div>
   </div>
@@ -451,6 +496,67 @@
 </footer>
 
 </div>
+<script>
+/* Live Hyderabad sky: the hero scene follows the real time in Hyderabad (IST, no daylight saving).
+   Testing: ?sky=night|dawn|day|dusk forces a phase, ?time=18:05 forces a time. */
+(function () {
+  var scene = document.querySelector('.scene');
+  if (!scene) return;
+  var LAT = 17.385, LON = 78.4867, IST = 330, rad = Math.PI / 180;
+  var sun = scene.querySelector('.sun'), label = document.getElementById('sky-time');
+  var q = new URLSearchParams(location.search);
+  var force = (q.get('sky') || '').toLowerCase(), forceTime = q.get('time');
+
+  function clamp(x) { return Math.max(0, Math.min(1, x)); }
+  function ramp(x, a, b) { return clamp((x - a) / (b - a)); }
+
+  // Sunrise and sunset in IST minutes after midnight (NOAA approximation, within a few minutes)
+  function sunTimes(d) {
+    var start = Date.UTC(d.getUTCFullYear(), 0, 1), n = Math.floor((d - start) / 864e5) + 1;
+    var g = 2 * Math.PI / 365 * (n - 1);
+    var eq = 229.18 * (0.000075 + 0.001868 * Math.cos(g) - 0.032077 * Math.sin(g) - 0.014615 * Math.cos(2 * g) - 0.040849 * Math.sin(2 * g));
+    var dec = 0.006918 - 0.399912 * Math.cos(g) + 0.070257 * Math.sin(g) - 0.006758 * Math.cos(2 * g) + 0.000907 * Math.sin(2 * g) - 0.002697 * Math.cos(3 * g) + 0.00148 * Math.sin(3 * g);
+    var ha = Math.acos(Math.cos(90.833 * rad) / (Math.cos(LAT * rad) * Math.cos(dec)) - Math.tan(LAT * rad) * Math.tan(dec)) / rad;
+    return { rise: 720 - 4 * (LON + ha) - eq + IST, set: 720 - 4 * (LON - ha) - eq + IST };
+  }
+
+  function fmt(m) {
+    m = ((Math.round(m) % 1440) + 1440) % 1440;
+    var h = Math.floor(m / 60), mm = m % 60, ap = h < 12 ? 'am' : 'pm';
+    return ((h % 12) || 12) + ':' + (mm < 10 ? '0' : '') + mm + ' ' + ap;
+  }
+
+  function update() {
+    var ist = new Date(Date.now() + IST * 6e4);              // shift so getUTC* reads Hyderabad time
+    var t = sunTimes(ist), m = ist.getUTCHours() * 60 + ist.getUTCMinutes();
+    if (forceTime && /^\d{1,2}:\d{2}$/.test(forceTime)) { var p = forceTime.split(':'); m = +p[0] * 60 + +p[1]; }
+    if (force === 'night') m = 22 * 60;
+    if (force === 'dawn') m = t.rise;
+    if (force === 'day') m = 13 * 60;
+    if (force === 'dusk') m = t.set;
+
+    var day = Math.min(ramp(m, t.rise - 20, t.rise + 50), 1 - ramp(m, t.set - 50, t.set + 20));
+    var warm = Math.max(0, 1 - Math.abs(m - t.rise) / 70, 1 - Math.abs(m - t.set) / 70);
+    scene.style.setProperty('--day', day.toFixed(3));
+    scene.style.setProperty('--warm', warm.toFixed(3));
+
+    // The sun arcs from the left (east) to the right (west) and dips behind the hill at either end
+    var f = (m - t.rise) / (t.set - t.rise), x = 70 + 380 * clamp(f), y = 278 - 200 * Math.sin(Math.PI * clamp(f));
+    if (f < 0 || f > 1) y = 278 + 40 * Math.min(1, Math.abs(f < 0 ? f : f - 1) * 8);
+    sun.setAttribute('transform', 'translate(' + x.toFixed(1) + ' ' + y.toFixed(1) + ')');
+
+    var phase = warm > 0.35 ? (m < 720 ? 'dawn' : 'dusk') : (day > 0.5 ? 'day' : 'night');
+    var mood = { night: 'the stars are out', dawn: 'the stars are fading', day: 'the stars are resting', dusk: 'the stars are coming out' }[phase];
+    scene.setAttribute('data-sky', phase);
+    document.documentElement.setAttribute('data-sky', phase);
+    var tc = document.querySelector('meta[name="theme-color"]'); if (tc) tc.setAttribute('content', phase === 'day' ? '#ECE7F6' : '#12302A');
+    if (label) label.textContent = fmt(m) + ' in Hyderabad · ' + mood;
+  }
+
+  update();
+  if (!force && !forceTime) setInterval(update, 60000);
+})();
+</script>
 <!-- psychrun.com · "Ask the Keeper" pop-up
      Paste just before </body> in index.html.
      Shows once per visitor: after they scroll halfway, or when they move to leave the tab (desktop).
