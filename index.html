@@ -451,5 +451,197 @@
 </footer>
 
 </div>
+<!-- psychrun.com · "Ask the Keeper" pop-up
+     Paste just before </body> in index.html.
+     Shows once per visitor: after they scroll halfway, or when they move to leave the tab (desktop).
+     Preview anytime: https://psychrun.com/?keeper
+     The illustration is its own drawing (the Keeper up close, a question mark in the stars). -->
+<style>
+  #keeper-overlay{
+    position:fixed;inset:0;z-index:9999;padding:16px;
+    display:flex;align-items:center;justify-content:center;
+    background:rgba(8,20,17,.62);backdrop-filter:blur(3px);-webkit-backdrop-filter:blur(3px);
+    opacity:0;visibility:hidden;transition:opacity .4s ease,visibility 0s linear .4s;
+  }
+  #keeper-overlay.show{opacity:1;visibility:visible;transition:opacity .4s ease}
+
+  #keeper{
+    position:relative;overflow:hidden;width:100%;max-width:440px;box-sizing:border-box;
+    max-height:calc(100vh - 32px);overflow-y:auto;
+    border-radius:18px;padding:8px 26px 26px;text-align:center;
+    color:#F4F1E6;background:#12302A;
+    box-shadow:0 24px 70px rgba(0,0,0,.45),inset 0 0 0 1px rgba(194,162,100,.3);
+    transform:translateY(18px) scale(.97);transition:transform .55s cubic-bezier(.2,.8,.2,1);
+  }
+  #keeper-overlay.show #keeper{transform:none}
+
+  /* the illustration */
+  #keeper .keeper-art{display:block;width:calc(100% + 52px);margin:0 -26px 4px}
+  #keeper .keeper-art svg{display:block;width:100%;height:auto;max-height:36vh}
+#keeper .kp .star{fill:#DCE6E0;animation:kp-tw 4s ease-in-out infinite}
+#keeper .kp .cstar{fill:#E2C482}
+#keeper .kp .cline{stroke:#C2A264;stroke-opacity:.6;stroke-width:1;fill:none;stroke-dasharray:140;stroke-dashoffset:140;animation:kp-draw 1.2s ease forwards}
+#keeper .kp .glow{animation:kp-glow 3.4s ease-in-out infinite;transform-box:fill-box;transform-origin:center}
+#keeper .kp .eye{fill:#E2C482;animation:kp-blink 6s infinite;transform-box:fill-box;transform-origin:center}
+#keeper .kp .float{animation:kp-float 5s ease-in-out infinite}
+#keeper .kp .spark{fill:#F1DDAE;opacity:0;animation:kp-spark 2.8s ease-in-out infinite}
+@keyframes kp-tw{50%{opacity:.25}}
+@keyframes kp-draw{to{stroke-dashoffset:0}}
+@keyframes kp-glow{50%{opacity:.6;transform:scale(1.08)}}
+@keyframes kp-blink{0%,92%,100%{transform:scaleY(1)}95%{transform:scaleY(.1)}}
+@keyframes kp-float{50%{transform:translateY(-3px)}}
+@keyframes kp-spark{0%{opacity:0;transform:translateY(0)}40%{opacity:1}100%{opacity:0;transform:translateY(-18px)}}
+@media (prefers-reduced-motion:reduce){#keeper .kp *{animation:none!important}#keeper .kp .cline{stroke-dashoffset:0}}
+
+  #keeper .eyebrow{
+    margin:0 0 10px;font:600 11px/1 var(--sans,"Manrope",system-ui,sans-serif);
+    letter-spacing:.2em;text-transform:uppercase;color:#C2A264;
+  }
+  #keeper blockquote{
+    margin:0 auto 10px;max-width:340px;min-height:2.5em;
+    font-family:var(--display,"Cormorant Garamond",Georgia,serif);font-style:italic;font-weight:500;
+    font-size:25px;line-height:1.25;text-wrap:balance;transition:opacity .35s ease;
+  }
+  #keeper .sub{
+    margin:0 0 22px;font:400 14px/1.5 var(--sans,"Manrope",system-ui,sans-serif);color:#8FA79C;
+  }
+  #keeper .actions{display:flex;gap:10px;justify-content:center;flex-wrap:wrap}
+  #keeper .actions a{
+    font:600 14px/1 var(--sans,"Manrope",system-ui,sans-serif);text-decoration:none;
+    padding:13px 20px;border-radius:999px;transition:transform .15s ease,background .15s ease;
+  }
+  #keeper .actions a:hover{transform:translateY(-1px)}
+  #keeper .primary{background:#C2A264;color:#12302A}
+  #keeper .primary:hover{background:#D3B577}
+  #keeper .ghost{color:#F4F1E6;box-shadow:inset 0 0 0 1px rgba(244,241,230,.35)}
+  #keeper .ghost:hover{background:rgba(244,241,230,.07)}
+
+  #keeper-close{
+    position:absolute;top:10px;right:12px;z-index:2;width:36px;height:36px;
+    border:0;border-radius:50%;background:rgba(18,48,42,.6);cursor:pointer;
+    color:#DCE6E0;font-size:24px;line-height:36px;
+  }
+  #keeper-close:hover{color:#fff;background:rgba(18,48,42,.9)}
+
+  @media (prefers-reduced-motion:reduce){
+    #keeper-overlay,#keeper,#keeper blockquote{transition:none}
+  }
+</style>
+
+<div id="keeper-overlay" role="dialog" aria-modal="true" aria-labelledby="keeper-line">
+  <div id="keeper">
+    <button id="keeper-close" aria-label="Close">&times;</button>
+    <div class="keeper-art">
+<svg class="kp" viewBox="0 0 520 300" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+<defs><radialGradient id="kpA-g"><stop offset="0" stop-color="#E8C989" stop-opacity=".8"/><stop offset=".5" stop-color="#C2A264" stop-opacity=".2"/><stop offset="1" stop-color="#C2A264" stop-opacity="0"/></radialGradient>
+<linearGradient id="kpA-fg" x1="0" y1="0" x2="0" y2="1"><stop offset=".7" stop-color="#fff"/><stop offset="1" stop-color="#000"/></linearGradient><mask id="kpA-m" maskUnits="userSpaceOnUse" x="0" y="0" width="520" height="300"><rect width="520" height="300" fill="url(#kpA-fg)"/></mask></defs>
+<circle class="star" cx="172" cy="37" r="0.8" style="animation-delay:0.3s"/>
+<circle class="star" cx="278" cy="78" r="0.8" style="animation-delay:3.2s"/>
+<circle class="star" cx="117" cy="25" r="1.4" style="animation-delay:0.2s"/>
+<circle class="star" cx="55" cy="90" r="0.8" style="animation-delay:3.3s"/>
+<circle class="star" cx="41" cy="120" r="0.8" style="animation-delay:3.4s"/>
+<circle class="star" cx="33" cy="173" r="1.2" style="animation-delay:1.5s"/>
+<circle class="star" cx="62" cy="118" r="1" style="animation-delay:1.3s"/>
+<circle class="star" cx="284" cy="20" r="0.8" style="animation-delay:2.2s"/>
+<circle class="star" cx="399" cy="97" r="1.4" style="animation-delay:1.3s"/>
+<circle class="star" cx="134" cy="43" r="1" style="animation-delay:0.3s"/>
+<circle class="star" cx="160" cy="103" r="1.2" style="animation-delay:2.6s"/>
+<circle class="star" cx="154" cy="196" r="0.8" style="animation-delay:1.8s"/>
+<circle class="star" cx="92" cy="74" r="1.4" style="animation-delay:1.5s"/>
+<circle class="star" cx="491" cy="23" r="1.2" style="animation-delay:1.2s"/>
+<circle class="star" cx="408" cy="21" r="0.8" style="animation-delay:3.3s"/>
+<circle class="star" cx="40" cy="143" r="1.4" style="animation-delay:1.0s"/>
+<circle class="star" cx="21" cy="97" r="1" style="animation-delay:2.1s"/>
+<circle class="star" cx="257" cy="50" r="1.2" style="animation-delay:0.5s"/>
+<circle class="star" cx="134" cy="83" r="1.4" style="animation-delay:0.3s"/>
+<circle class="star" cx="452" cy="165" r="1.2" style="animation-delay:2.5s"/>
+<circle class="star" cx="503" cy="139" r="1.4" style="animation-delay:3.4s"/>
+<circle class="star" cx="85" cy="42" r="1" style="animation-delay:2.3s"/>
+<circle class="star" cx="16" cy="168" r="1" style="animation-delay:0.9s"/>
+<circle class="star" cx="12" cy="88" r="1.2" style="animation-delay:2.1s"/>
+<circle class="star" cx="169" cy="32" r="0.8" style="animation-delay:1.6s"/>
+<circle class="star" cx="445" cy="191" r="1.4" style="animation-delay:1.4s"/>
+<line class="cline" x1="96" y1="58" x2="116" y2="40" style="animation-delay:0.30s"/>
+<line class="cline" x1="116" y1="40" x2="142" y2="40" style="animation-delay:0.52s"/>
+<line class="cline" x1="142" y1="40" x2="158" y2="58" style="animation-delay:0.74s"/>
+<line class="cline" x1="158" y1="58" x2="152" y2="80" style="animation-delay:0.96s"/>
+<line class="cline" x1="152" y1="80" x2="130" y2="94" style="animation-delay:1.18s"/>
+<line class="cline" x1="130" y1="94" x2="126" y2="116" style="animation-delay:1.40s"/>
+<circle class="cstar" cx="96" cy="58" r="2.2"/>
+<circle class="cstar" cx="116" cy="40" r="2.2"/>
+<circle class="cstar" cx="142" cy="40" r="2.2"/>
+<circle class="cstar" cx="158" cy="58" r="2.2"/>
+<circle class="cstar" cx="152" cy="80" r="2.2"/>
+<circle class="cstar" cx="130" cy="94" r="2.2"/>
+<circle class="cstar" cx="126" cy="116" r="2.2"/><circle class="cstar" cx="125" cy="140" r="3"/>
+<path d="M150 150 C 190 185, 215 215, 236 244" fill="none" stroke="#C2A264" stroke-opacity=".35" stroke-dasharray="2 5"/>
+<g mask="url(#kpA-m)">
+<path d="M170 300 C 172 230 190 150 260 112 C 330 150 348 230 350 300 Z" fill="#1A3E36" stroke="#8FA79C" stroke-opacity=".55"/>
+<path d="M214 300 C 220 250 232 222 260 214 C 288 222 300 250 306 300" fill="none" stroke="#8FA79C" stroke-opacity=".3"/>
+</g>
+<ellipse cx="260" cy="182" rx="30" ry="38" fill="#0A1C18"/>
+<circle class="eye" cx="249" cy="180" r="2.2"/><circle class="eye" cx="271" cy="180" r="2.2"/>
+<circle class="glow" cx="260" cy="244" r="54" fill="url(#kpA-g)"/>
+<g class="float"><polygon points="218,262 260,274 260,244 218,232" fill="#F4F1E6" stroke="#C2A264"/><polygon points="260,274 302,262 302,232 260,244" fill="#F4F1E6" stroke="#C2A264"/>
+<path d="M226 244 L250 251 M226 251 L250 258 M226 258 L244 263 M270 251 L294 244 M270 258 L294 251 M276 263 L294 258" stroke="#C2A264" stroke-width=".9"/></g>
+<ellipse cx="214" cy="258" rx="12" ry="9" fill="#1A3E36" stroke="#8FA79C" stroke-opacity=".55"/><ellipse cx="306" cy="258" rx="12" ry="9" fill="#1A3E36" stroke="#8FA79C" stroke-opacity=".55"/>
+<circle class="spark" cx="246" cy="230" r="1.4"/><circle class="spark" cx="274" cy="226" r="1.4" style="animation-delay:.9s"/><circle class="spark" cx="260" cy="236" r="1.4" style="animation-delay:1.8s"/>
+</svg>
+</div>
+    <p class="eyebrow">The Keeper speaks</p>
+    <blockquote id="keeper-line">A report nobody can trace is an opinion with a chart.</blockquote>
+    <p class="sub">Got a question about data that needs an owner?</p>
+    <div class="actions">
+      <a class="primary" href="mailto:hello@psychrun.com?subject=A%20question%20for%20the%20Keeper">Ask the Keeper</a>
+      <a class="ghost" href="https://www.linkedin.com/in/PSYCHRUN" target="_blank" rel="noopener">Connect on LinkedIn</a>
+    </div>
+  </div>
+</div>
+
+<script>
+  (function () {
+    var KEY = 'keeper-seen-v1';                         // bump to v2 to show it to everyone again
+    var FORCE = /[?&]keeper\b/.test(location.search);   // ?keeper on the URL previews it anytime
+
+    var seen = false;
+    try { seen = localStorage.getItem(KEY) === '1'; } catch (e) {}
+    if (seen && !FORCE) return;
+
+    var overlay = document.getElementById('keeper-overlay');
+    var lineEl = document.getElementById('keeper-line');
+    var lines = [
+      'A report nobody can trace is an opinion with a chart.',
+      'Every number downstream deserves a path back.',
+      'When everyone is responsible, no one is accountable.',
+      'Name what you know. Name what you don’t.'
+    ];
+
+    var shown = false, rotator;
+    function open() {
+      if (shown) return;
+      shown = true;
+      overlay.classList.add('show');
+      var i = 0;
+      rotator = setInterval(function () {
+        lineEl.style.opacity = 0;
+        setTimeout(function () { i = (i + 1) % lines.length; lineEl.textContent = lines[i]; lineEl.style.opacity = 1; }, 350);
+      }, 4500);
+      try { localStorage.setItem(KEY, '1'); } catch (e) {}
+    }
+    function close() { overlay.classList.remove('show'); clearInterval(rotator); }
+
+    if (FORCE) setTimeout(open, 400);
+    window.addEventListener('scroll', function () {
+      var h = document.documentElement;
+      if ((h.scrollTop + innerHeight) / h.scrollHeight > 0.5) open();
+    }, { passive: true });
+    document.addEventListener('mouseout', function (e) { if (!e.relatedTarget && e.clientY < 10) open(); });
+
+    document.getElementById('keeper-close').addEventListener('click', close);
+    overlay.addEventListener('click', function (e) { if (e.target === overlay) close(); });
+    document.addEventListener('keydown', function (e) { if (e.key === 'Escape' && shown) close(); });
+  })();
+</script>
+
 </body>
 </html>
