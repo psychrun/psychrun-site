@@ -8,7 +8,7 @@
 <link rel="canonical" href="https://psychrun.com/">
 <link rel="icon" href="/favicon.svg" type="image/svg+xml">
 <link rel="apple-touch-icon" href="/apple-touch-icon.png">
-<meta name="theme-color" content="#12302A">
+<meta name="theme-color" content="#080D0E">
 <meta name="author" content="Saikiran Chennuri">
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://psychrun.com/">
@@ -24,45 +24,80 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;1,400&family=Manrope:wght@400;500;600&family=Bangers&display=swap" rel="stylesheet">
 <style>
+  /* One night, one line.
+     The whole page shares the hero's sky: night colours by default, a light lavender set while it is day in Hyderabad
+     (the script at the bottom sets data-sky on <html>). A single traced line runs down the page through every section. */
   :root{
-    --bg:#F1F2EE; --panel:#E6E8E2; --ink:#1A2024; --ink-2:#4E575E; --ink-3:#646C72; --line:#CBD0CB; --brass-ink:#94742F;
-    --deep:#12302A; --deep-2:#1A3E36; --pale:#DCE6E0; --pale-2:#8FA79C; --brass:#C2A264;
+    --bg:#12302A; --bar:#080D0E; --panel:#183A32; --ink:#F4F1E6; --ink-2:#CBD8D1; --ink-3:#93AAA0; --line:rgba(143,167,156,.26);
+    --accent:#C2A264; --accent-2:#E2C482; --on-accent:#12302A;
+    --pale:#DCE6E0; --pale-2:#8FA79C; --deep:#12302A; --brass:#C2A264;
     --display:"Cormorant Garamond",Georgia,serif; --sans:"Manrope",system-ui,sans-serif;
+    --pad:32px; --gut:56px; --lx:8px;
+    --star:polygon(50% 0,62% 38%,100% 50%,62% 62%,50% 100%,38% 62%,0 50%,38% 38%);
   }
+  html[data-sky="day"]{
+    --bg:#ECE7F6; --bar:#CFE0F7; --panel:#E4E0F4; --ink:#2B2640; --ink-2:#463F5E; --ink-3:#544D6E; --line:rgba(43,38,64,.2);
+    --accent:#8A6A2E; --accent-2:#6F5219; --on-accent:#FFFFFF; --pale:#3F3957; --pale-2:#5E5778;
+  }
+  @media(max-width:720px){:root{--pad:20px;--gut:34px;--lx:6px}}
+
   *{box-sizing:border-box;margin:0}
-  html{scroll-behavior:smooth;scroll-padding-top:72px}
-  body{background:var(--bg);color:var(--ink);font-family:var(--sans);font-size:16px;line-height:1.65;-webkit-font-smoothing:antialiased}
+  html{scroll-behavior:smooth;scroll-padding-top:76px}
+  body{background:var(--bg);color:var(--ink);font-family:var(--sans);font-size:17px;line-height:1.65;-webkit-font-smoothing:antialiased;transition:background-color 1.6s ease,color 1.6s ease}
+  /* Two skies over the page colour, fixed to the window so the top of the screen is always sky:
+     at night black sky settles into green; by day blue sky settles into lavender. They cross-fade with the hour. */
+  html::before,html::after{content:"";position:fixed;inset:0;z-index:-2;pointer-events:none;transition:opacity 1.6s ease}
+  html::before{background:linear-gradient(180deg,#05080A 0%,rgba(5,8,10,.84) 30%,rgba(5,8,10,0) 100%)}
+  html::after{background:linear-gradient(180deg,#A9CDF5 0%,rgba(169,205,245,.72) 35%,rgba(169,205,245,0) 100%);opacity:0}
+  html[data-sky="day"]::before{opacity:0}
+  html[data-sky="day"]::after{opacity:1}
+  /* A faint field of stars behind everything; it fades out by day */
+  body::before{content:"";position:fixed;inset:0;z-index:-1;pointer-events:none;opacity:.5;transition:opacity 1.6s ease;background-size:560px 560px;
+    background-image:
+      radial-gradient(1.3px 1.3px at 42px 68px,#DCE6E0 50%,transparent 52%),
+      radial-gradient(1px 1px at 151px 212px,#DCE6E0 50%,transparent 52%),
+      radial-gradient(1.5px 1.5px at 248px 96px,#E2C482 50%,transparent 52%),
+      radial-gradient(1px 1px at 331px 318px,#DCE6E0 50%,transparent 52%),
+      radial-gradient(1.2px 1.2px at 420px 44px,#DCE6E0 50%,transparent 52%),
+      radial-gradient(1px 1px at 508px 236px,#DCE6E0 50%,transparent 52%),
+      radial-gradient(1.4px 1.4px at 96px 432px,#DCE6E0 50%,transparent 52%),
+      radial-gradient(1px 1px at 286px 498px,#E2C482 50%,transparent 52%),
+      radial-gradient(1.2px 1.2px at 462px 452px,#DCE6E0 50%,transparent 52%)}
+  html[data-sky="day"] body::before{opacity:0}
   a{color:inherit;text-decoration:none;border-bottom:1px solid var(--line);transition:border-color .15s,color .15s}
   a:hover{border-bottom-color:var(--ink)}
-  :focus-visible{outline:2px solid var(--brass);outline-offset:3px}
-  .wrap{max-width:1140px;margin:0 auto;padding:0 32px}
-  @media(max-width:720px){.wrap{padding:0 20px}}
+  :focus-visible{outline:2px solid var(--accent);outline-offset:3px}
+  .wrap{max-width:1140px;margin:0 auto;padding:0 var(--pad)}
 
-  /* Dark hero band */
-  .band{background:var(--deep);color:var(--pale)}
-  .band a{border-color:rgba(220,230,224,.3)}
-  .band a:hover{border-color:var(--pale)}
-  .topbar{position:sticky;top:0;z-index:50;border-bottom:1px solid rgba(143,167,156,.2)}
+  /* Sticky header */
+  .topbar{position:sticky;top:0;z-index:50;background:var(--bar);background:color-mix(in srgb,var(--bar) 82%,transparent);-webkit-backdrop-filter:blur(10px);backdrop-filter:blur(10px);border-bottom:1px solid var(--line);transition:background-color 1.6s ease}
   header{display:flex;justify-content:space-between;align-items:center;gap:20px;padding:10px 0}
+  header .brand{font-family:var(--display);font-size:22px;font-weight:500;white-space:nowrap}
   header nav{display:flex;min-width:0;overflow-x:auto;white-space:nowrap;scrollbar-width:none}
   header nav::-webkit-scrollbar{display:none}
-  header nav a{padding:10px 0}
+  header nav a{margin-left:26px;padding:10px 0;font-size:14px;font-weight:500;color:var(--ink-3);border:0}
   header nav a:first-child{margin-left:0}
-  header .brand{white-space:nowrap}
-  header .brand{font-family:var(--display);font-size:22px;font-weight:500}
-  header nav a{margin-left:26px;font-size:14px;font-weight:500;color:var(--pale-2);border:0}
-  header nav a:hover{color:var(--pale)}
-  @media(max-width:600px){header{gap:16px}header .brand{font-size:19px}header nav a{margin-left:18px;font-size:13.5px}}
+  header nav a:hover{color:var(--ink)}
+  @media(max-width:600px){
+    header{gap:16px}header .brand{font-size:19px}header nav a{margin-left:18px;font-size:13.5px}
+    header nav{-webkit-mask-image:linear-gradient(90deg,#000 82%,transparent);mask-image:linear-gradient(90deg,#000 82%,transparent)}
+    header nav a:last-child{padding-right:36px}
+  }
 
-  .hero{display:grid;grid-template-columns:1fr 1fr;gap:56px;align-items:center;padding:64px 0 72px}
-  .hero .portrait{width:76px;height:76px;border-radius:50%;object-fit:cover;display:block;margin-bottom:26px;border:2px solid rgba(194,162,100,.55);box-shadow:0 0 0 6px rgba(143,167,156,.12)}
-  .hero h1{font-family:var(--display);font-weight:400;font-size:clamp(44px,5.6vw,72px);line-height:1.02;letter-spacing:-.015em;max-width:13ch;color:#F4F6F2}
-  .hero h1 i{font-style:italic;color:var(--brass)}
-  .hero .lede{margin-top:26px;max-width:44ch;color:var(--pale);font-size:17px;opacity:.88}
-  .hero .cta{margin-top:30px;display:flex;gap:26px;align-items:center;font-size:14.5px;font-weight:500}
-  .hero .cta .primary{background:var(--brass);color:var(--deep);padding:11px 20px;border:0;border-radius:2px}
-  .hero .cta .primary:hover{background:#d4b478}
-  @media(max-width:860px){.hero{grid-template-columns:1fr;gap:40px;padding:48px 0 56px}}
+  /* Hero */
+  .hero{display:grid;grid-template-columns:1.05fr 1fr;gap:56px;align-items:center;padding:72px 0 88px}
+  .hero .portrait{position:relative;overflow:hidden;width:76px;height:76px;border-radius:50%;display:block;margin-bottom:28px;border:2px solid rgba(194,162,100,.55);box-shadow:0 0 0 6px rgba(143,167,156,.12)}
+  .hero .portrait img{display:block;width:100%;height:100%;object-fit:cover;filter:grayscale(1) contrast(1.12) brightness(1.04)}
+  .hero .portrait::after{content:"";position:absolute;inset:0;background:#3E8572;mix-blend-mode:color;opacity:.9;transition:background-color 1.6s ease}
+  html[data-sky="day"] .hero .portrait{border-color:rgba(138,106,46,.55);box-shadow:0 0 0 6px rgba(120,100,170,.14)}
+  html[data-sky="day"] .hero .portrait::after{background:#6A72B8}
+  .hero h1{font-family:var(--display);font-weight:400;font-size:clamp(46px,6.2vw,84px);line-height:1;letter-spacing:-.02em;max-width:12ch}
+  .hero h1 i{font-style:italic;color:var(--accent)}
+  .hero .lede{margin-top:28px;max-width:46ch;color:var(--ink-2);font-size:18px}
+  .hero .cta{margin-top:32px;display:flex;gap:26px;align-items:center;font-size:14.5px;font-weight:600}
+  .hero .cta .primary{background:var(--accent);color:var(--on-accent);padding:14px 24px;border:0;border-radius:999px;transition:filter .15s}
+  .hero .cta .primary:hover{filter:brightness(1.1)}
+  @media(max-width:860px){.hero{grid-template-columns:1fr;gap:36px;padding:40px 0 60px}}
 
   /* Hero scene */
   .scene{width:100%;max-width:520px;justify-self:end;margin:0}
@@ -102,20 +137,6 @@
   .scene .sun{opacity:max(var(--day), var(--warm));transition:opacity 2s ease,transform 2s ease}
   .scene .sky-time{display:block;margin-top:6px;font-family:var(--sans);font-style:normal;font-size:12.5px;letter-spacing:.02em;color:var(--pale-2);opacity:.85;min-height:1.4em}
   @media(prefers-reduced-motion:reduce){.scene .sky-day,.scene .sky-warm,.scene .night,.scene .moon,.scene .sun{transition:none}}
-
-  /* Daytime: the hero band turns light lavender */
-  .band{transition:background-color 1.6s ease,color 1.6s ease}
-  .band header .brand,.band header nav a,.hero h1,.hero .lede,.band .scene figcaption{transition:color 1.6s ease}
-  html[data-sky="day"] .band{background:#ECE7F6;color:#2B2640}
-  html[data-sky="day"] .band a{border-color:rgba(43,38,64,.28)}
-  html[data-sky="day"] .band a:hover{border-color:#2B2640}
-  html[data-sky="day"] header nav a{color:#5E5778}
-  html[data-sky="day"] header nav a:hover{color:#2B2640}
-  html[data-sky="day"] .hero h1{color:#2B2640}
-  html[data-sky="day"] .hero h1 i{color:#8A6A2E}
-  html[data-sky="day"] .hero .lede{color:#3F3957;opacity:1}
-  html[data-sky="day"] .hero .portrait{border-color:rgba(138,106,46,.55);box-shadow:0 0 0 6px rgba(120,100,170,.14)}
-  html[data-sky="day"] .scene figcaption,html[data-sky="day"] .scene .sky-time{color:#5E5778}
   .scene path[fill="#17392F"],.scene path[fill="#0D2520"]{transition:fill 1.6s ease}
   html[data-sky="day"] .scene path[fill="#17392F"]{fill:#CFC6E6}
   html[data-sky="day"] .scene path[fill="#0D2520"]{fill:#B4A9D2}
@@ -125,101 +146,108 @@
   html[data-sky="day"] .scene .wizard path[fill="#1A3E36"]{fill:#2C3566;stroke:#A3ACD9;stroke-opacity:.8}
   html[data-sky="day"] .scene .seeker path[fill="#336B5D"]{fill:#5B67A3}
   html[data-sky="day"] .scene .seeker line{stroke:#5B67A3}
-  @media(prefers-reduced-motion:reduce){.band,.band *{transition:none!important}}
+  @media(prefers-reduced-motion:reduce){html::before,html::after,body,body::before,.topbar,.scene *{transition:none!important}}
 
   /* Record strip */
-  .strip{border-bottom:1px solid var(--line)}
+  .strip{border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
   .strip dl{display:grid;grid-template-columns:repeat(4,1fr);gap:0}
-  .strip dl>div{padding:22px 24px 22px 0;border-right:1px solid var(--line);margin-right:24px}
+  .strip dl>div{padding:24px 24px 24px 0;border-right:1px solid var(--line);margin-right:24px}
   .strip dl>div:last-child{border:0;margin:0}
-  .strip dt{font-size:12.5px;color:var(--ink-3);font-weight:500}
-  .strip dd{font-family:var(--display);font-size:22px;font-weight:500;line-height:1.2;margin-top:4px}
+  .strip dt{font-size:11.5px;font-weight:600;letter-spacing:.16em;text-transform:uppercase;color:var(--ink-3)}
+  .strip dd{font-family:var(--display);font-size:23px;font-weight:500;line-height:1.2;margin-top:6px}
   @media(max-width:860px){.strip dl{grid-template-columns:1fr 1fr}.strip dl>div:nth-child(2){border:0;margin:0}}
   @media(max-width:480px){.strip dl{grid-template-columns:1fr}.strip dl>div{border:0;margin:0;padding:14px 0;border-bottom:1px solid var(--line)}.strip dl>div:last-child{border:0}}
 
-  section{padding:76px 0;border-bottom:1px solid var(--line)}
-  .sec{display:grid;grid-template-columns:240px 1fr;gap:32px}
-  .sec h2{font-family:var(--display);font-weight:400;font-size:36px;line-height:1.05;letter-spacing:-.01em}
-  .sec .lead{color:var(--ink-3);font-size:14px;margin-top:10px;max-width:22ch}
-  @media(max-width:860px){.sec{grid-template-columns:1fr;gap:20px}.sec .lead{max-width:none}section{padding:56px 0}}
+  /* The traced line: one dashed line down the page, a ring where each section begins, a star for each role */
+  .trace{position:relative;counter-reset:sec}
+  .trace::before{content:"";position:absolute;left:calc(var(--pad) + var(--lx));top:0;bottom:0;border-left:1px dashed var(--accent);opacity:.75}
+  section{position:relative;padding:96px 0 96px var(--gut)}
+  .trace>section{counter-increment:sec}
+  .trace>section::before{content:"";position:absolute;left:calc(var(--lx) - 6px);top:97px;margin-left:2px;width:9px;height:9px;border-radius:50%;background:var(--accent-2);box-shadow:0 0 0 5px rgba(194,162,100,.22)}
+  .sec>div:first-child{margin-bottom:46px}
+  .sec h2{font-family:var(--display);font-weight:400;font-size:clamp(40px,5vw,62px);line-height:1.02;letter-spacing:-.015em}
+  .sec h2::before{content:"0" counter(sec);display:block;margin-bottom:16px;font-family:var(--sans);font-size:12px;font-weight:600;line-height:1;letter-spacing:.2em;color:var(--accent-2)}
+  .sec .lead{color:var(--ink-3);font-size:17px;margin-top:12px;max-width:44ch}
+  @media(max-width:860px){section{padding:64px 0 64px var(--gut)}.trace>section::before{top:65px}.sec>div:first-child{margin-bottom:34px}}
 
   /* Experience */
-  /* The timeline is a constellation: a dashed brass line with a star per role */
-  .roles{border-left:1px dashed var(--brass-ink);margin-left:10px}
-  .role{position:relative;padding:0 0 52px 36px;max-width:68ch}
+  .role{position:relative;padding-bottom:68px;max-width:74ch}
   .role:last-child{padding-bottom:0}
-  .role::before{content:"";position:absolute;left:-8.5px;top:6px;width:16px;height:16px;background:var(--brass-ink);clip-path:polygon(50% 0,62% 38%,100% 50%,62% 62%,50% 100%,38% 62%,0 50%,38% 38%)}
-  .role.now::before{left:-11.5px;top:3px;width:22px;height:22px}
-  .role .when{color:var(--ink-3);font-size:13.5px;font-weight:500}
-  .role h3{font-family:var(--display);font-weight:500;font-size:28px;line-height:1.15;margin-top:4px}
-  .role .org{color:var(--ink-2);font-size:14.5px;margin:4px 0 12px}
+  .role::before{content:"";position:absolute;left:calc(var(--lx) - var(--gut) - 7.5px);top:3px;width:16px;height:16px;background:var(--accent);clip-path:var(--star)}
+  .role.now::before{left:calc(var(--lx) - var(--gut) - 10.5px);top:0;width:22px;height:22px;background:var(--accent-2)}
+  .role .when{color:var(--ink-3);font-size:12.5px;font-weight:600;letter-spacing:.1em;text-transform:uppercase}
+  .role h3{font-family:var(--display);font-weight:500;font-size:clamp(28px,3.4vw,38px);line-height:1.1;margin-top:8px}
+  .role .org{color:var(--ink-2);font-size:15.5px;margin:8px 0 16px}
+  .role .client{color:var(--ink-3)}
+  .role p{color:var(--ink-2)}
   .role p+p{margin-top:8px}
-  .metrics{display:flex;gap:22px 38px;flex-wrap:wrap;margin-top:18px;padding:24px 28px;background:var(--deep);border-radius:4px}
-  .metrics div{font-size:13px;color:var(--pale);max-width:24ch}
-  .metrics b{display:block;font-family:var(--display);font-weight:500;font-size:34px;color:#E2C482;line-height:1.1;white-space:nowrap;margin-bottom:2px}
+  .role ul{list-style:none;padding:0;margin:14px 0 0}
+  .role li{position:relative;padding-left:20px;margin-bottom:8px;font-size:15.5px;color:var(--ink-2)}
+  .role li::before{content:"";position:absolute;left:0;top:12px;width:9px;height:1px;background:var(--accent)}
+  .metrics{display:flex;gap:26px 46px;flex-wrap:wrap;margin-top:24px;padding:26px 0 24px;border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+  .metrics div{font-size:13.5px;color:var(--ink-3);max-width:24ch}
+  .metrics b{display:block;font-family:var(--display);font-weight:500;font-size:44px;color:var(--accent-2);line-height:1;white-space:nowrap;margin-bottom:6px}
   .metrics .big{max-width:none;flex:1 0 100%}
-  .metrics .big b{font-size:clamp(32px,7vw,40px)}
-  .more{margin-top:14px}
-  .more summary{display:inline-block;cursor:pointer;list-style:none;padding:8px 0;font-size:14px;font-weight:600;color:var(--deep);border-bottom:1px solid var(--brass-ink)}
+  .metrics .big b{font-size:clamp(42px,8.4vw,78px);letter-spacing:-.01em;margin-bottom:8px}
+  @media(max-width:600px){.metrics{display:grid;grid-template-columns:1fr 1fr;gap:20px}.metrics .big{grid-column:1/-1}.metrics b{font-size:34px}}
+  .more{margin-top:16px}
+  .more summary{display:inline-block;cursor:pointer;list-style:none;padding:8px 0;font-size:14px;font-weight:600;color:var(--ink);border-bottom:1px solid var(--accent)}
   .more summary::-webkit-details-marker{display:none}
   .more summary::after{content:"  +"}
   .more[open] summary::after{content:"  \2013"}
 
-  /* Story teaser: a deliberate side door into the graphic novel */
-  a.story{margin-top:64px;display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:22px 40px;padding:34px 38px;background:#0B0B10;color:#EDEDF2;border:0;border-radius:6px}
-  a.story small{display:block;font-size:11.5px;font-weight:600;letter-spacing:.18em;text-transform:uppercase;color:#A9A9B8}
-  a.story b{display:block;margin:10px 0 8px;font-family:"Bangers",var(--sans);font-weight:400;font-size:clamp(40px,6vw,60px);line-height:1;letter-spacing:.02em;color:#EAB71F;transform:rotate(-2deg);transform-origin:left center}
-  a.story .go{flex:0 0 auto;background:#EAB71F;color:#0B0B10;font-size:14.5px;font-weight:600;padding:14px 22px;border-radius:999px;transition:background .15s}
-  a.story:hover .go{background:#F5C83A}
-  @media(max-width:600px){a.story{padding:28px 24px}}
+  /* Easter egg: the question mark in the stars above the Keeper is a hidden door to the graphic novel */
+  .closing .keeper-art{position:relative;max-width:480px;margin:0 auto}
+  .egg-door{position:absolute;z-index:1;left:14%;top:6%;width:22%;height:46%;padding:0;border:0;border-radius:50%;background:none;cursor:pointer}
+  .egg-door:hover+svg .cstar,.egg-door:focus-visible+svg .cstar{fill:#FFF3CF}
+  .egg-door:hover+svg .cline,.egg-door:focus-visible+svg .cline{stroke-opacity:1}
+  .egg{margin:4px auto 22px;font-size:15px;color:var(--ink-2)}
+  .egg[hidden]{display:none}
+  .egg a{margin-left:4px;font-family:"Bangers",var(--sans);font-size:24px;letter-spacing:.04em;color:#EAB71F;border-bottom-color:rgba(234,183,31,.5)}
+  .egg a:hover{border-bottom-color:#EAB71F}
 
-  .role ul{list-style:none;padding:0;margin:12px 0 0}
-  .role li{position:relative;padding-left:18px;margin-bottom:7px;font-size:15px;color:var(--ink-2)}
-  .role li::before{content:"";position:absolute;left:0;top:10px;width:8px;height:1px;background:var(--brass)}
-  .role .client{color:var(--ink-3)}
-
-  /* Credentials */
-  .creds{display:grid;grid-template-columns:1.2fr 1fr;gap:36px 48px}
-  .creds h3{font-family:var(--display);font-weight:500;font-size:23px;margin-bottom:10px}
-  .creds ul{list-style:none;padding:0}
-  .creds li{padding:9px 0;border-top:1px solid var(--line);font-size:15px;color:var(--ink-2)}
-  .creds li:last-child{border-bottom:1px solid var(--line)}
-  .creds li span{display:block;font-size:13px;color:var(--ink-3);margin-top:1px}
-  .creds p{color:var(--ink-2);font-size:15.5px;max-width:42ch}
-  .creds .block+.block{margin-top:30px}
-  @media(max-width:760px){.creds{grid-template-columns:1fr;gap:28px}}
-
-  /* Principles */
-  .principles{display:grid;grid-template-columns:repeat(3,1fr);gap:36px}
-  .principles h3{font-family:var(--display);font-weight:500;font-size:24px;line-height:1.15;margin-bottom:8px}
-  .principles p{color:var(--ink-2);font-size:15.5px}
-  .principles>div::before{content:"";display:block;width:14px;height:14px;margin-bottom:14px;background:var(--brass-ink);clip-path:polygon(50% 0,62% 38%,100% 50%,62% 62%,50% 100%,38% 62%,0 50%,38% 38%)}
-  @media(max-width:760px){.principles{grid-template-columns:1fr;gap:26px}}
+  /* Approach */
+  .principles{display:grid;grid-template-columns:repeat(3,1fr);gap:44px}
+  .principles h3{font-family:var(--display);font-weight:500;font-style:italic;font-size:31px;line-height:1.1;margin-bottom:12px}
+  .principles p{color:var(--ink-2);font-size:16px}
+  .principles>div::before{content:"";display:block;width:16px;height:16px;margin-bottom:16px;background:var(--accent);clip-path:var(--star)}
+  @media(max-width:760px){.principles{grid-template-columns:1fr;gap:32px}}
 
   /* Capabilities */
   .caps{display:grid;grid-template-columns:repeat(2,1fr);gap:20px}
-  .cap{background:var(--panel);padding:26px 28px;border-radius:4px}
-  .cap h3{font-family:var(--display);font-weight:500;font-size:23px;margin-bottom:8px}
-  .cap p{color:var(--ink-2);font-size:15.5px;max-width:42ch}
-  @media(max-width:640px){.caps{grid-template-columns:1fr}}
+  .cap{background:var(--panel);border:1px solid var(--line);padding:30px 32px;border-radius:8px;transition:background-color 1.6s ease,border-color .2s ease}
+  .cap:hover{border-color:var(--accent)}
+  .cap h3{font-family:var(--display);font-weight:500;font-size:26px;margin-bottom:10px}
+  .cap p{color:var(--ink-2);font-size:16px}
+  @media(max-width:640px){.caps{grid-template-columns:1fr}.cap{padding:26px 24px}}
 
-  /* Contact */
-  /* Closing scene: the Keeper and Contact share one night band (replaces the old pop-up) */
-  #credentials{border-bottom:0}
-  .closing{background:var(--deep);color:#F4F1E6;padding:0;border:0;text-align:center}
-  .closing .inner{max-width:600px;margin:0 auto;padding:48px 24px 64px}
-  .closing .keeper-art svg{display:block;width:100%;max-width:460px;height:auto;margin:0 auto 4px}
-  .closing .eyebrow{font-family:var(--sans);font-size:11px;font-weight:600;line-height:1;letter-spacing:.2em;text-transform:uppercase;color:var(--brass);margin-bottom:14px}
-  .closing blockquote{margin:0 auto 14px;max-width:15em;min-height:2.4em;font-family:var(--display);font-style:italic;font-weight:500;font-size:clamp(28px,4.2vw,38px);line-height:1.2;text-wrap:balance;transition:opacity .35s ease}
-  .closing .sub{max-width:46ch;margin:0 auto 26px;color:var(--pale);opacity:.88}
+  /* Credentials */
+  .creds{display:grid;grid-template-columns:1.2fr 1fr;gap:36px 56px}
+  .creds h3{font-family:var(--display);font-weight:500;font-size:25px;margin-bottom:12px}
+  .creds ul{list-style:none;padding:0}
+  .creds li{padding:11px 0;border-top:1px solid var(--line);font-size:15.5px}
+  .creds li:last-child{border-bottom:1px solid var(--line)}
+  .creds li span{display:block;font-size:13px;color:var(--ink-3);margin-top:1px}
+  .creds p{color:var(--ink-2);font-size:16px;max-width:42ch}
+  .creds .block+.block{margin-top:32px}
+  @media(max-width:760px){.creds{grid-template-columns:1fr;gap:28px}}
+
+  /* Closing scene: the line arrives at the Keeper's hill. Always night, whatever the hour. */
+  .closing{--ink:#F4F1E6;--ink-2:#CBD8D1;--ink-3:#93AAA0;--line:rgba(143,167,156,.26);--accent:#C2A264;--accent-2:#E2C482;--on-accent:#12302A;
+    margin-top:96px;padding:0;background:#0D2520;color:var(--ink);text-align:center}
+  .closing .hill{position:absolute;left:0;bottom:calc(100% - 1px);width:100%;height:96px;display:block}
+  .closing .inner{max-width:700px;margin:0 auto;padding:24px 24px 72px}
+  .closing .keeper-art svg{display:block;width:100%;max-width:480px;height:auto;margin:0 auto 6px}
+  .closing .eyebrow{font-family:var(--sans);font-size:11px;font-weight:600;line-height:1;letter-spacing:.2em;text-transform:uppercase;color:var(--accent-2);margin-bottom:16px}
+  .closing blockquote{margin:0 auto 16px;max-width:15em;min-height:2.3em;font-family:var(--display);font-style:italic;font-weight:500;font-size:clamp(30px,4.8vw,48px);line-height:1.15;text-wrap:balance;transition:opacity .35s ease}
+  .closing .sub{max-width:46ch;margin:0 auto 28px;color:var(--ink-2)}
   .closing .actions{display:flex;gap:12px;justify-content:center;flex-wrap:wrap}
-  .closing .actions a{font-size:14.5px;font-weight:600;line-height:1;padding:16px 24px;border:0;border-radius:999px;transition:background .15s}
-  .closing .primary{background:var(--brass);color:var(--deep)}
-  .closing .primary:hover{background:#D3B577}
-  .closing .ghost{color:#F4F1E6;box-shadow:inset 0 0 0 1px rgba(244,241,230,.35)}
+  .closing .actions a{font-size:14.5px;font-weight:600;line-height:1;padding:16px 26px;border:0;border-radius:999px;transition:background .15s,filter .15s}
+  .closing .primary{background:var(--accent);color:var(--on-accent)}
+  .closing .primary:hover{filter:brightness(1.1)}
+  .closing .ghost{color:var(--ink);box-shadow:inset 0 0 0 1px rgba(244,241,230,.35)}
   .closing .ghost:hover{background:rgba(244,241,230,.07)}
-  .closing .mail{display:inline-block;margin-top:24px;padding:6px 0;font-size:15px;color:var(--pale);border-color:rgba(220,230,224,.35)}
-  .closing .mail:hover{border-color:var(--pale)}
+  .closing .mail{display:inline-block;margin-top:26px;padding:6px 0;font-size:15px;color:var(--ink-2)}
   .kp .star{fill:#DCE6E0;animation:kp-tw 4s ease-in-out infinite}
   .kp .cstar{fill:#E2C482}
   .kp .cline{stroke:#C2A264;stroke-opacity:.6;stroke-width:1;fill:none;stroke-dasharray:140;stroke-dashoffset:140;animation:kp-draw 1.2s ease forwards}
@@ -233,10 +261,32 @@
   @keyframes kp-blink{0%,92%,100%{transform:scaleY(1)}95%{transform:scaleY(.1)}}
   @keyframes kp-float{50%{transform:translateY(-3px)}}
   @keyframes kp-spark{0%{opacity:0;transform:translateY(0)}40%{opacity:1}100%{opacity:0;transform:translateY(-18px)}}
+  footer{max-width:1140px;margin:0 auto;padding:22px var(--pad) 30px;border-top:1px solid var(--line);display:flex;justify-content:space-between;flex-wrap:wrap;gap:8px;color:var(--ink-3);font-size:13.5px;text-align:left}
+  footer a{border:0;color:var(--accent)}
+  footer a:hover{color:var(--accent-2)}
+
+  /* With scripts on: the line draws down as you scroll, rings and stars turn in, and cards rise into place */
+  html.js-draw .trace::before{clip-path:inset(0 -2px calc(100% - var(--drawn,0%)) -2px);transition:clip-path .25s linear}
+  html.js-draw .role::before,html.js-draw .principles>div::before,html.js-draw .trace>section::before{transform:scale(0) rotate(-120deg);opacity:0;transition:transform .7s cubic-bezier(.2,.8,.2,1),opacity .4s ease}
+  html.js-draw .role.in::before,html.js-draw .principles>div.in::before,html.js-draw .trace>section.in::before{transform:none;opacity:1}
+  html.js-draw .rv{opacity:0;transform:translateY(22px);transition:opacity .8s ease,transform .8s cubic-bezier(.2,.8,.2,1),border-color .2s ease}
+  html.js-draw .rv.in{opacity:1;transform:none}
   @media(prefers-reduced-motion:reduce){.kp *{animation:none!important}.kp .cline{stroke-dashoffset:0}.closing blockquote{transition:none}}
-  footer{max-width:1140px;margin:0 auto;padding:22px 32px 30px;border-top:1px solid rgba(143,167,156,.22);display:flex;justify-content:space-between;flex-wrap:wrap;gap:8px;color:var(--pale-2);font-size:13.5px;text-align:left}
-  footer a{border:0;color:var(--brass)}
-  footer a:hover{color:#E2C482}
+
+  /* Print: plain black on white, every bullet shown, no scenery */
+  @media print{
+    :root,html[data-sky="day"],.closing{--bg:#fff;--panel:#fff;--ink:#000;--ink-2:#1a1a1a;--ink-3:#444;--line:#bbb;--accent:#000;--accent-2:#000;--on-accent:#fff}
+    html::before,html::after,body::before,.topbar,.scene,.egg,.closing .keeper-art,.closing .hill,.hero .cta,.more summary,.closing .actions{display:none!important}
+    body{background:#fff;font-size:12pt}
+    .closing{background:none;margin-top:20px}
+    .hero{display:block;padding:0 0 20px}
+    .hero .portrait::after{display:none}
+    section{padding:26px 0 26px var(--gut)}
+    .role,.cap,.principles>div{break-inside:avoid}
+    html.js-draw .trace::before{clip-path:none}
+    html.js-draw .role::before,html.js-draw .principles>div::before,html.js-draw .trace>section::before{transform:none;opacity:1}
+    html.js-draw .rv{opacity:1;transform:none}
+  }
 </style>
 <script type="application/ld+json">
 {
@@ -270,7 +320,9 @@
 
     <div class="hero">
       <div>
-        <img class="portrait" src="portrait.jpg" alt="Saikiran Chennuri" width="76" height="76">
+        <!-- Portrait hidden for now. To bring it back, remove this comment wrapper:
+        <span class="portrait"><img src="portrait.jpg" alt="Saikiran Chennuri" width="76" height="76"></span>
+        -->
         <h1>Data you can trace, name, and <i>answer for.</i></h1>
         <p class="lede">I own data for a consumer banking line of business: deciding which sources can be trusted, fixing the ones that can't, and putting a name to every answer. Eight years across warehouses, catalogs, and now a bank's operations.</p>
         <div class="cta">
@@ -290,7 +342,7 @@
         <linearGradient id="mh" x1="0" x2="1"><stop offset="0" stop-color="#000"/><stop offset=".12" stop-color="#fff"/><stop offset=".88" stop-color="#fff"/><stop offset="1" stop-color="#000"/></linearGradient>
         <linearGradient id="mv" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#000" stop-opacity="0"/><stop offset="1" stop-color="#000"/></linearGradient>
         <mask id="fade" maskUnits="userSpaceOnUse" x="0" y="0" width="520" height="380"><rect width="520" height="380" fill="url(#mh)"/><rect y="336" width="520" height="44" fill="url(#mv)"/></mask>
-        <linearGradient id="sky-day-g" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#A99BD4"/><stop offset=".6" stop-color="#CEC4EA"/><stop offset="1" stop-color="#E9E3F5"/></linearGradient>
+        <linearGradient id="sky-day-g" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#86B8EE"/><stop offset=".55" stop-color="#BFCBF0"/><stop offset="1" stop-color="#E9E3F5"/></linearGradient>
         <linearGradient id="sky-warm-g" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#1E3F47" stop-opacity="0"/><stop offset=".35" stop-color="#5C5560"/><stop offset=".7" stop-color="#C08466"/><stop offset="1" stop-color="#E9BC7C"/></linearGradient>
         <radialGradient id="sky-fade-g" cx=".5" cy=".6" r=".52"><stop offset=".35" stop-color="#fff"/><stop offset="1" stop-color="#000"/></radialGradient>
         <linearGradient id="sky-vfade-g" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#000"/><stop offset=".22" stop-color="#fff"/><stop offset=".7" stop-color="#fff"/><stop offset=".86" stop-color="#000"/></linearGradient>
@@ -400,7 +452,7 @@
   </div>
 </div>
 
-<div class="wrap">
+<main class="wrap trace">
 
 <section id="experience">
   <div class="sec">
@@ -479,10 +531,6 @@
 
     </div>
   </div>
-  <a class="story" href="/story/">
-    <span><small>A side door · a graphic novel</small><b>Twenty-One Rooms</b>A job search, told one interview at a time. May to August 2026.</span>
-    <span class="go">Read how I got here &rarr;</span>
-  </a>
 </section>
 
 <section id="approach">
@@ -551,11 +599,13 @@
   </div>
 </section>
 
-</div>
+</main>
 
 <section id="contact" class="closing">
+  <svg class="hill" viewBox="0 0 1440 96" preserveAspectRatio="none" aria-hidden="true"><path d="M0 96 L0 70 C 240 30 520 8 760 14 C 1040 22 1260 52 1440 40 L1440 96 Z" fill="#0D2520"/></svg>
   <div class="inner">
     <div class="keeper-art">
+      <button class="egg-door" type="button" aria-label="A question in the stars" aria-expanded="false" aria-controls="egg"></button>
 <svg class="kp" viewBox="0 0 520 300" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
 <defs><radialGradient id="kpA-g"><stop offset="0" stop-color="#E8C989" stop-opacity=".8"/><stop offset=".5" stop-color="#C2A264" stop-opacity=".2"/><stop offset="1" stop-color="#C2A264" stop-opacity="0"/></radialGradient>
 <linearGradient id="kpA-fg" x1="0" y1="0" x2="0" y2="1"><stop offset=".7" stop-color="#fff"/><stop offset="1" stop-color="#000"/></linearGradient><mask id="kpA-m" maskUnits="userSpaceOnUse" x="0" y="0" width="520" height="300"><rect width="520" height="300" fill="url(#kpA-fg)"/></mask></defs>
@@ -612,6 +662,7 @@
 <circle class="spark" cx="246" cy="230" r="1.4"/><circle class="spark" cx="274" cy="226" r="1.4" style="animation-delay:.9s"/><circle class="spark" cx="260" cy="236" r="1.4" style="animation-delay:1.8s"/>
 </svg>
     </div>
+    <p class="egg" id="egg" hidden>You found the side door. <a href="/story/">Twenty-One Rooms</a></p>
     <h2 class="eyebrow">Contact · The Keeper speaks</h2>
     <blockquote id="keeper-line">A report nobody can trace is an opinion with a chart.</blockquote>
     <p class="sub">Got a question about data that needs an owner? Always happy to talk catalogs, lineage, and the practical side of owning data at scale.</p>
@@ -624,10 +675,51 @@
   <footer>
     <span>Saikiran Chennuri, Hyderabad</span>
     <span>psychrun.com · Updated Nov 2026</span>
-    <a href="/story/">How I got here, told as a story &rarr;</a>
   </footer>
 </section>
 <script>
+/* Easter egg: clicking the question mark in the stars above the Keeper reveals the door to the graphic novel. */
+(function () {
+  var door = document.querySelector('.egg-door'), egg = document.getElementById('egg');
+  if (!door || !egg) return;
+  door.addEventListener('click', function () {
+    egg.hidden = !egg.hidden;
+    door.setAttribute('aria-expanded', String(!egg.hidden));
+  });
+})();
+
+/* Printing opens every "More from this role" so nothing is hidden on paper. */
+addEventListener('beforeprint', function () {
+  document.querySelectorAll('details.more').forEach(function (d) { d.open = true; });
+});
+
+/* Constellation timeline: the dashed line draws down as you scroll and each star turns in as it arrives.
+   Skipped when motion is reduced; without scripts everything is simply visible. */
+(function () {
+  var roles = document.querySelector('.trace');
+  if (!roles) return;
+  if (window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+  document.documentElement.classList.add('js-draw');
+  [].forEach.call(document.querySelectorAll('.metrics, .cap, .creds .block'), function (el) { el.classList.add('rv'); });
+  var pending = [].slice.call(document.querySelectorAll('.trace > section, .role, .principles > div, .rv'));
+  var drawn = 0;
+  function draw() {
+    var line = innerHeight * 0.78, r = roles.getBoundingClientRect();
+    var p = Math.max(0, Math.min(1, (line - r.top) / r.height));
+    if (p > drawn) { drawn = p; roles.style.setProperty('--drawn', (p * 100).toFixed(1) + '%'); }
+    pending = pending.filter(function (el) {
+      if (el.getBoundingClientRect().top > line) return true;
+      el.classList.add('in');
+      return false;
+    });
+  }
+  addEventListener('scroll', draw, { passive: true });
+  addEventListener('resize', draw);
+  draw();
+  /* Safety net: keep checking until everything on the page has been revealed */
+  var timer = setInterval(function () { draw(); if (!pending.length) clearInterval(timer); }, 700);
+})();
+
 /* The Keeper's line in the closing band rotates through four sayings (still when motion is reduced). */
 (function () {
   var el = document.getElementById('keeper-line');
@@ -697,7 +789,7 @@
     var mood = { night: 'the stars are out', dawn: 'the stars are fading', day: 'the stars are resting', dusk: 'the stars are coming out' }[phase];
     scene.setAttribute('data-sky', phase);
     document.documentElement.setAttribute('data-sky', phase);
-    var tc = document.querySelector('meta[name="theme-color"]'); if (tc) tc.setAttribute('content', phase === 'day' ? '#ECE7F6' : '#12302A');
+    var tc = document.querySelector('meta[name="theme-color"]'); if (tc) tc.setAttribute('content', phase === 'day' ? '#CFE0F7' : '#080D0E');
     if (label) label.textContent = fmt(m) + ' in Hyderabad · ' + mood;
   }
 
