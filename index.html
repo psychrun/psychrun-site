@@ -22,15 +22,15 @@
 <meta property="og:title" content="Saikiran Chennuri — Data Governance & Metadata Management">
 <meta property="og:description" content="Data you can trace, name, and answer for. Data Owner, Hyderabad.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;1,400&family=Manrope:wght@400;500;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;1,400&family=Manrope:wght@400;500;600&family=Bangers&display=swap" rel="stylesheet">
 <style>
   :root{
-    --bg:#F1F2EE; --panel:#E6E8E2; --ink:#1A2024; --ink-2:#4E575E; --ink-3:#848C93; --line:#CBD0CB;
+    --bg:#F1F2EE; --panel:#E6E8E2; --ink:#1A2024; --ink-2:#4E575E; --ink-3:#646C72; --line:#CBD0CB; --brass-ink:#94742F;
     --deep:#12302A; --deep-2:#1A3E36; --pale:#DCE6E0; --pale-2:#8FA79C; --brass:#C2A264;
     --display:"Cormorant Garamond",Georgia,serif; --sans:"Manrope",system-ui,sans-serif;
   }
   *{box-sizing:border-box;margin:0}
-  html{scroll-behavior:smooth}
+  html{scroll-behavior:smooth;scroll-padding-top:72px}
   body{background:var(--bg);color:var(--ink);font-family:var(--sans);font-size:16px;line-height:1.65;-webkit-font-smoothing:antialiased}
   a{color:inherit;text-decoration:none;border-bottom:1px solid var(--line);transition:border-color .15s,color .15s}
   a:hover{border-bottom-color:var(--ink)}
@@ -42,11 +42,17 @@
   .band{background:var(--deep);color:var(--pale)}
   .band a{border-color:rgba(220,230,224,.3)}
   .band a:hover{border-color:var(--pale)}
-  header{display:flex;justify-content:space-between;align-items:center;padding:26px 0}
+  .topbar{position:sticky;top:0;z-index:50;border-bottom:1px solid rgba(143,167,156,.2)}
+  header{display:flex;justify-content:space-between;align-items:center;gap:20px;padding:10px 0}
+  header nav{display:flex;min-width:0;overflow-x:auto;white-space:nowrap;scrollbar-width:none}
+  header nav::-webkit-scrollbar{display:none}
+  header nav a{padding:10px 0}
+  header nav a:first-child{margin-left:0}
+  header .brand{white-space:nowrap}
   header .brand{font-family:var(--display);font-size:22px;font-weight:500}
   header nav a{margin-left:26px;font-size:14px;font-weight:500;color:var(--pale-2);border:0}
   header nav a:hover{color:var(--pale)}
-  @media(max-width:600px){header{flex-direction:column;align-items:flex-start;gap:10px;padding:22px 0}header nav{display:flex;flex-wrap:wrap;gap:6px 16px}header nav a{margin:0;font-size:13.5px}}
+  @media(max-width:600px){header{gap:16px}header .brand{font-size:19px}header nav a{margin-left:18px;font-size:13.5px}}
 
   .hero{display:grid;grid-template-columns:1fr 1fr;gap:56px;align-items:center;padding:64px 0 72px}
   .hero .portrait{width:76px;height:76px;border-radius:50%;object-fit:cover;display:block;margin-bottom:26px;border:2px solid rgba(194,162,100,.55);box-shadow:0 0 0 6px rgba(143,167,156,.12)}
@@ -78,7 +84,8 @@
   @keyframes blink{0%,92%,100%{opacity:1}95%{opacity:0}}
   @keyframes spark{0%{opacity:0;transform:translateY(0)}40%{opacity:1}100%{opacity:0;transform:translateY(-14px)}}
   @keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-3px)}}
-  @media(max-width:860px){.scene{justify-self:start}}
+  @media(max-width:860px){.scene{justify-self:start;order:-1;max-width:400px}}
+  .scene figcaption a{color:inherit}
   @keyframes draw{to{stroke-dashoffset:0}}
   @keyframes appear{to{opacity:1}}
   @media(prefers-reduced-motion:reduce){
@@ -137,18 +144,34 @@
   @media(max-width:860px){.sec{grid-template-columns:1fr;gap:20px}.sec .lead{max-width:none}section{padding:56px 0}}
 
   /* Experience */
-  .roles{border-left:1px solid var(--line);margin-left:6px}
-  .role{position:relative;padding:0 0 46px 34px;max-width:64ch}
+  /* The timeline is a constellation: a dashed brass line with a star per role */
+  .roles{border-left:1px dashed var(--brass-ink);margin-left:10px}
+  .role{position:relative;padding:0 0 52px 36px;max-width:68ch}
   .role:last-child{padding-bottom:0}
-  .role::before{content:"";position:absolute;left:-6px;top:9px;width:11px;height:11px;border-radius:50%;background:var(--bg);border:1.5px solid var(--deep)}
-  .role.now::before{background:var(--deep)}
+  .role::before{content:"";position:absolute;left:-8.5px;top:6px;width:16px;height:16px;background:var(--brass-ink);clip-path:polygon(50% 0,62% 38%,100% 50%,62% 62%,50% 100%,38% 62%,0 50%,38% 38%)}
+  .role.now::before{left:-11.5px;top:3px;width:22px;height:22px}
   .role .when{color:var(--ink-3);font-size:13.5px;font-weight:500}
   .role h3{font-family:var(--display);font-weight:500;font-size:28px;line-height:1.15;margin-top:4px}
   .role .org{color:var(--ink-2);font-size:14.5px;margin:4px 0 12px}
   .role p+p{margin-top:8px}
-  .metrics{display:flex;gap:30px;flex-wrap:wrap;margin-top:18px;padding-top:14px;border-top:1px solid var(--line)}
-  .metrics div{font-size:13px;color:var(--ink-2)}
-  .metrics b{display:block;font-family:var(--display);font-weight:500;font-size:27px;color:var(--ink);line-height:1.1}
+  .metrics{display:flex;gap:22px 38px;flex-wrap:wrap;margin-top:18px;padding:24px 28px;background:var(--deep);border-radius:4px}
+  .metrics div{font-size:13px;color:var(--pale);max-width:24ch}
+  .metrics b{display:block;font-family:var(--display);font-weight:500;font-size:34px;color:#E2C482;line-height:1.1;white-space:nowrap;margin-bottom:2px}
+  .metrics .big{max-width:none;flex:1 0 100%}
+  .metrics .big b{font-size:clamp(32px,7vw,40px)}
+  .more{margin-top:14px}
+  .more summary{display:inline-block;cursor:pointer;list-style:none;padding:8px 0;font-size:14px;font-weight:600;color:var(--deep);border-bottom:1px solid var(--brass-ink)}
+  .more summary::-webkit-details-marker{display:none}
+  .more summary::after{content:"  +"}
+  .more[open] summary::after{content:"  \2013"}
+
+  /* Story teaser: a deliberate side door into the graphic novel */
+  a.story{margin-top:64px;display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:22px 40px;padding:34px 38px;background:#0B0B10;color:#EDEDF2;border:0;border-radius:6px}
+  a.story small{display:block;font-size:11.5px;font-weight:600;letter-spacing:.18em;text-transform:uppercase;color:#A9A9B8}
+  a.story b{display:block;margin:10px 0 8px;font-family:"Bangers",var(--sans);font-weight:400;font-size:clamp(40px,6vw,60px);line-height:1;letter-spacing:.02em;color:#EAB71F;transform:rotate(-2deg);transform-origin:left center}
+  a.story .go{flex:0 0 auto;background:#EAB71F;color:#0B0B10;font-size:14.5px;font-weight:600;padding:14px 22px;border-radius:999px;transition:background .15s}
+  a.story:hover .go{background:#F5C83A}
+  @media(max-width:600px){a.story{padding:28px 24px}}
 
   .role ul{list-style:none;padding:0;margin:12px 0 0}
   .role li{position:relative;padding-left:18px;margin-bottom:7px;font-size:15px;color:var(--ink-2)}
@@ -170,19 +193,50 @@
   .principles{display:grid;grid-template-columns:repeat(3,1fr);gap:36px}
   .principles h3{font-family:var(--display);font-weight:500;font-size:24px;line-height:1.15;margin-bottom:8px}
   .principles p{color:var(--ink-2);font-size:15.5px}
+  .principles>div::before{content:"";display:block;width:14px;height:14px;margin-bottom:14px;background:var(--brass-ink);clip-path:polygon(50% 0,62% 38%,100% 50%,62% 62%,50% 100%,38% 62%,0 50%,38% 38%)}
   @media(max-width:760px){.principles{grid-template-columns:1fr;gap:26px}}
 
   /* Capabilities */
-  .caps{display:grid;grid-template-columns:repeat(2,1fr);gap:36px 40px}
+  .caps{display:grid;grid-template-columns:repeat(2,1fr);gap:20px}
+  .cap{background:var(--panel);padding:26px 28px;border-radius:4px}
   .cap h3{font-family:var(--display);font-weight:500;font-size:23px;margin-bottom:8px}
   .cap p{color:var(--ink-2);font-size:15.5px;max-width:42ch}
   @media(max-width:640px){.caps{grid-template-columns:1fr}}
 
   /* Contact */
-  .contact p{max-width:48ch;color:var(--ink-2)}
-  .contact .links{margin-top:22px;display:flex;gap:28px;flex-wrap:wrap;font-size:17px}
-  .contact .links a{border-color:var(--brass)}
-  footer{padding:28px 0 52px;display:flex;justify-content:space-between;flex-wrap:wrap;gap:8px;color:var(--ink-3);font-size:13.5px}
+  /* Closing scene: the Keeper and Contact share one night band (replaces the old pop-up) */
+  #credentials{border-bottom:0}
+  .closing{background:var(--deep);color:#F4F1E6;padding:0;border:0;text-align:center}
+  .closing .inner{max-width:600px;margin:0 auto;padding:48px 24px 64px}
+  .closing .keeper-art svg{display:block;width:100%;max-width:460px;height:auto;margin:0 auto 4px}
+  .closing .eyebrow{font-family:var(--sans);font-size:11px;font-weight:600;line-height:1;letter-spacing:.2em;text-transform:uppercase;color:var(--brass);margin-bottom:14px}
+  .closing blockquote{margin:0 auto 14px;max-width:15em;min-height:2.4em;font-family:var(--display);font-style:italic;font-weight:500;font-size:clamp(28px,4.2vw,38px);line-height:1.2;text-wrap:balance;transition:opacity .35s ease}
+  .closing .sub{max-width:46ch;margin:0 auto 26px;color:var(--pale);opacity:.88}
+  .closing .actions{display:flex;gap:12px;justify-content:center;flex-wrap:wrap}
+  .closing .actions a{font-size:14.5px;font-weight:600;line-height:1;padding:16px 24px;border:0;border-radius:999px;transition:background .15s}
+  .closing .primary{background:var(--brass);color:var(--deep)}
+  .closing .primary:hover{background:#D3B577}
+  .closing .ghost{color:#F4F1E6;box-shadow:inset 0 0 0 1px rgba(244,241,230,.35)}
+  .closing .ghost:hover{background:rgba(244,241,230,.07)}
+  .closing .mail{display:inline-block;margin-top:24px;padding:6px 0;font-size:15px;color:var(--pale);border-color:rgba(220,230,224,.35)}
+  .closing .mail:hover{border-color:var(--pale)}
+  .kp .star{fill:#DCE6E0;animation:kp-tw 4s ease-in-out infinite}
+  .kp .cstar{fill:#E2C482}
+  .kp .cline{stroke:#C2A264;stroke-opacity:.6;stroke-width:1;fill:none;stroke-dasharray:140;stroke-dashoffset:140;animation:kp-draw 1.2s ease forwards}
+  .kp .glow{animation:kp-glow 3.4s ease-in-out infinite;transform-box:fill-box;transform-origin:center}
+  .kp .eye{fill:#E2C482;animation:kp-blink 6s infinite;transform-box:fill-box;transform-origin:center}
+  .kp .float{animation:kp-float 5s ease-in-out infinite}
+  .kp .spark{fill:#F1DDAE;opacity:0;animation:kp-spark 2.8s ease-in-out infinite}
+  @keyframes kp-tw{50%{opacity:.25}}
+  @keyframes kp-draw{to{stroke-dashoffset:0}}
+  @keyframes kp-glow{50%{opacity:.6;transform:scale(1.08)}}
+  @keyframes kp-blink{0%,92%,100%{transform:scaleY(1)}95%{transform:scaleY(.1)}}
+  @keyframes kp-float{50%{transform:translateY(-3px)}}
+  @keyframes kp-spark{0%{opacity:0;transform:translateY(0)}40%{opacity:1}100%{opacity:0;transform:translateY(-18px)}}
+  @media(prefers-reduced-motion:reduce){.kp *{animation:none!important}.kp .cline{stroke-dashoffset:0}.closing blockquote{transition:none}}
+  footer{max-width:1140px;margin:0 auto;padding:22px 32px 30px;border-top:1px solid rgba(143,167,156,.22);display:flex;justify-content:space-between;flex-wrap:wrap;gap:8px;color:var(--pale-2);font-size:13.5px;text-align:left}
+  footer a{border:0;color:var(--brass)}
+  footer a:hover{color:#E2C482}
 </style>
 <script type="application/ld+json">
 {
@@ -202,12 +256,17 @@
 </head>
 <body>
 
-<div class="band">
+<div class="band topbar">
   <div class="wrap">
     <header>
       <div class="brand">Saikiran Chennuri</div>
-      <nav><a href="#experience">Experience</a><a href="#approach">Approach</a><a href="#capabilities">Capabilities</a><a href="#credentials">Credentials</a><a href="#contact">Contact</a></nav>
+      <nav aria-label="Sections"><a href="#experience">Experience</a><a href="#approach">Approach</a><a href="#capabilities">Capabilities</a><a href="#credentials">Credentials</a><a href="#contact">Contact</a></nav>
     </header>
+  </div>
+</div>
+
+<div class="band">
+  <div class="wrap">
 
     <div class="hero">
       <div>
@@ -324,7 +383,7 @@
         <g class="seeker" style="animation-delay:1.25s" transform="translate(202.0 338.8) scale(1.35)"><path d="M-7 0 L-4 -17 C -4 -26, 4 -26, 4 -17 L7 0 Z" fill="#336B5D"/><line x1="5" y1="-13" x2="10" y2="-9" stroke="#336B5D" stroke-width="2" stroke-linecap="round"/><circle class="lamp" cx="11" cy="-7" r="7" fill="url(#g-lamp)" style="animation-delay:0.6s"/><circle cx="11" cy="-7" r="1.8" fill="#F1DDAE"/></g>
         <g class="seeker" style="animation-delay:1.60s" transform="translate(303.1 320.5) scale(1.15)"><path d="M-7 0 L-4 -17 C -4 -26, 4 -26, 4 -17 L7 0 Z" fill="#336B5D"/><line x1="5" y1="-13" x2="10" y2="-9" stroke="#336B5D" stroke-width="2" stroke-linecap="round"/><circle class="lamp" cx="11" cy="-7" r="7" fill="url(#g-lamp)" style="animation-delay:1.2s"/><circle cx="11" cy="-7" r="1.8" fill="#F1DDAE"/></g>
         </svg>
-        <figcaption>Ask the Keeper. He answers only what the stars can trace.<span class="sky-time" id="sky-time" aria-live="off"></span></figcaption>
+        <figcaption><a href="#contact">Ask the Keeper.</a> He answers only what the stars can trace.<span class="sky-time" id="sky-time" aria-live="off"></span></figcaption>
       </figure>
     </div>
   </div>
@@ -367,6 +426,14 @@
         <h3>Lead EDC Developer</h3>
         <div class="org">Tata Consultancy Services &middot; <span class="client">pan-European insurance group, GDPR governance program</span></div>
         <p>Led Informatica Enterprise Data Catalog delivery across ten countries: catalog administration, resource and connection design, remote-agent scanning across regions, profiling, and data-domain discovery, with curated metadata flowing into Collibra for enterprise stewardship.</p>
+        <div class="metrics">
+          <div class="big"><b>6–8 h → 1–2 h</b>scan time on the heaviest databases</div>
+          <div><b>12M</b>metadata assets</div>
+          <div><b>700</b>application connections</div>
+          <div><b>10</b>countries</div>
+          <div><b>9</b>database technologies</div>
+        </div>
+        <details class="more"><summary>More from this role</summary>
         <ul>
           <li>Built custom mapplets with regex-based data-domain rules that classified sensitive columns automatically for GDPR reporting.</li>
           <li>Reworked the scanning strategy for the heaviest databases, cutting scan time from 6–8 hours to 1–2.</li>
@@ -375,12 +442,7 @@
           <li>Stayed on as the team wound down from six to one, running the catalog end to end until project sunset: development, deployment, support, and every stakeholder conversation. The hardest stretch of the program, and the one that taught me to operate rather than contribute.</li>
           <li>After the program wound down, moved to a manufacturing client as L2 support and migration liaison for their OBIEE reporting estate, through to leaving TCS in May 2026.</li>
         </ul>
-        <div class="metrics">
-          <div><b>12M</b>metadata assets</div>
-          <div><b>700</b>application connections</div>
-          <div><b>10</b>countries</div>
-          <div><b>9</b>database technologies</div>
-        </div>
+        </details>
       </div>
 
       <div class="role">
@@ -388,11 +450,18 @@
         <h3>Senior System Analyst, Operations Lead</h3>
         <div class="org">Cognizant &middot; <span class="client">vehicle manufacturer, Teradata data warehouse</span></div>
         <p>Led a 12–15 member operations team covering system health, batch execution, database administration, and deployments for a Teradata warehouse fed by Informatica PowerCenter.</p>
+        <div class="metrics">
+          <div class="big"><b>70% → 98%</b>batch SLA, within three months</div>
+          <div><b>3 days</b>cloud migration, against a five-day plan</div>
+          <div><b>12–15</b>member operations team</div>
+        </div>
+        <details class="more"><summary>More from this role</summary>
         <ul>
           <li>Raised batch SLA from 70% to 98% within three months through parameter optimisation, query tuning, and process fixes.</li>
           <li>Led three migrations: two PowerCenter upgrades (9.x to 10.x) and an on-premise move to Teradata Cloud and Informatica Cloud, completed in three days against a five-day plan.</li>
           <li>Introduced ServiceNow alert automation that reduced SLA misses and escalations; represented the team in daily Scrum and executed critical batch releases personally.</li>
         </ul>
+        </details>
       </div>
 
       <div class="role">
@@ -400,14 +469,20 @@
         <h3>Programmer Analyst Trainee, then System Analyst</h3>
         <div class="org">Cognizant &middot; <span class="client">UK banking institution</span></div>
         <p>The first project, and still the foundation. Application and production support for banking systems on Unix and Oracle: batch jobs, server maintenance, uptime monitoring, incident troubleshooting, and user provisioning across Ab Initio and PowerCenter.</p>
+        <details class="more"><summary>More from this role</summary>
         <ul>
           <li>Became the team's cross-functional resource across all three project domains, deployed by management on high-priority issues.</li>
           <li>Resolved a major escalation by bringing every stakeholder into one thread and clearing a mismatch between what users expected and what they had requested.</li>
         </ul>
+        </details>
       </div>
 
     </div>
   </div>
+  <a class="story" href="/story/">
+    <span><small>A side door · a graphic novel</small><b>Twenty-One Rooms</b>A job search, told one interview at a time. May to August 2026.</span>
+    <span class="go">Read how I got here &rarr;</span>
+  </a>
 </section>
 
 <section id="approach">
@@ -476,26 +551,99 @@
   </div>
 </section>
 
-<section id="contact" class="contact" style="border:0">
-  <div class="sec">
-    <div><h2>Contact</h2></div>
-    <div>
-      <p>Always happy to talk catalogs, lineage, and the practical side of owning data at scale.</p>
-      <div class="links">
-        <a href="mailto:hello@psychrun.com">hello@psychrun.com</a>
-        <a href="https://www.linkedin.com/in/PSYCHRUN" rel="me">LinkedIn</a>
-      </div>
-    </div>
-  </div>
-</section>
-
-<footer>
-  <span>Saikiran Chennuri, Hyderabad</span>
-  <span>psychrun.com · Updated Oct 2026</span>
-  <a href="/story/" style="color:inherit; opacity:0.7; text-decoration:none; font-size:0.9em;">How I got here, told as a story &rarr;</a>
-</footer>
-
 </div>
+
+<section id="contact" class="closing">
+  <div class="inner">
+    <div class="keeper-art">
+<svg class="kp" viewBox="0 0 520 300" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+<defs><radialGradient id="kpA-g"><stop offset="0" stop-color="#E8C989" stop-opacity=".8"/><stop offset=".5" stop-color="#C2A264" stop-opacity=".2"/><stop offset="1" stop-color="#C2A264" stop-opacity="0"/></radialGradient>
+<linearGradient id="kpA-fg" x1="0" y1="0" x2="0" y2="1"><stop offset=".7" stop-color="#fff"/><stop offset="1" stop-color="#000"/></linearGradient><mask id="kpA-m" maskUnits="userSpaceOnUse" x="0" y="0" width="520" height="300"><rect width="520" height="300" fill="url(#kpA-fg)"/></mask></defs>
+<circle class="star" cx="172" cy="37" r="0.8" style="animation-delay:0.3s"/>
+<circle class="star" cx="278" cy="78" r="0.8" style="animation-delay:3.2s"/>
+<circle class="star" cx="117" cy="25" r="1.4" style="animation-delay:0.2s"/>
+<circle class="star" cx="55" cy="90" r="0.8" style="animation-delay:3.3s"/>
+<circle class="star" cx="41" cy="120" r="0.8" style="animation-delay:3.4s"/>
+<circle class="star" cx="33" cy="173" r="1.2" style="animation-delay:1.5s"/>
+<circle class="star" cx="62" cy="118" r="1" style="animation-delay:1.3s"/>
+<circle class="star" cx="284" cy="20" r="0.8" style="animation-delay:2.2s"/>
+<circle class="star" cx="399" cy="97" r="1.4" style="animation-delay:1.3s"/>
+<circle class="star" cx="134" cy="43" r="1" style="animation-delay:0.3s"/>
+<circle class="star" cx="160" cy="103" r="1.2" style="animation-delay:2.6s"/>
+<circle class="star" cx="154" cy="196" r="0.8" style="animation-delay:1.8s"/>
+<circle class="star" cx="92" cy="74" r="1.4" style="animation-delay:1.5s"/>
+<circle class="star" cx="491" cy="23" r="1.2" style="animation-delay:1.2s"/>
+<circle class="star" cx="408" cy="21" r="0.8" style="animation-delay:3.3s"/>
+<circle class="star" cx="40" cy="143" r="1.4" style="animation-delay:1.0s"/>
+<circle class="star" cx="21" cy="97" r="1" style="animation-delay:2.1s"/>
+<circle class="star" cx="257" cy="50" r="1.2" style="animation-delay:0.5s"/>
+<circle class="star" cx="134" cy="83" r="1.4" style="animation-delay:0.3s"/>
+<circle class="star" cx="452" cy="165" r="1.2" style="animation-delay:2.5s"/>
+<circle class="star" cx="503" cy="139" r="1.4" style="animation-delay:3.4s"/>
+<circle class="star" cx="85" cy="42" r="1" style="animation-delay:2.3s"/>
+<circle class="star" cx="16" cy="168" r="1" style="animation-delay:0.9s"/>
+<circle class="star" cx="12" cy="88" r="1.2" style="animation-delay:2.1s"/>
+<circle class="star" cx="169" cy="32" r="0.8" style="animation-delay:1.6s"/>
+<circle class="star" cx="445" cy="191" r="1.4" style="animation-delay:1.4s"/>
+<line class="cline" x1="96" y1="58" x2="116" y2="40" style="animation-delay:0.30s"/>
+<line class="cline" x1="116" y1="40" x2="142" y2="40" style="animation-delay:0.52s"/>
+<line class="cline" x1="142" y1="40" x2="158" y2="58" style="animation-delay:0.74s"/>
+<line class="cline" x1="158" y1="58" x2="152" y2="80" style="animation-delay:0.96s"/>
+<line class="cline" x1="152" y1="80" x2="130" y2="94" style="animation-delay:1.18s"/>
+<line class="cline" x1="130" y1="94" x2="126" y2="116" style="animation-delay:1.40s"/>
+<circle class="cstar" cx="96" cy="58" r="2.2"/>
+<circle class="cstar" cx="116" cy="40" r="2.2"/>
+<circle class="cstar" cx="142" cy="40" r="2.2"/>
+<circle class="cstar" cx="158" cy="58" r="2.2"/>
+<circle class="cstar" cx="152" cy="80" r="2.2"/>
+<circle class="cstar" cx="130" cy="94" r="2.2"/>
+<circle class="cstar" cx="126" cy="116" r="2.2"/><circle class="cstar" cx="125" cy="140" r="3"/>
+<path d="M150 150 C 190 185, 215 215, 236 244" fill="none" stroke="#C2A264" stroke-opacity=".35" stroke-dasharray="2 5"/>
+<g mask="url(#kpA-m)">
+<path d="M170 300 C 172 230 190 150 260 112 C 330 150 348 230 350 300 Z" fill="#1A3E36" stroke="#8FA79C" stroke-opacity=".55"/>
+<path d="M214 300 C 220 250 232 222 260 214 C 288 222 300 250 306 300" fill="none" stroke="#8FA79C" stroke-opacity=".3"/>
+</g>
+<ellipse cx="260" cy="182" rx="30" ry="38" fill="#0A1C18"/>
+<circle class="eye" cx="249" cy="180" r="2.2"/><circle class="eye" cx="271" cy="180" r="2.2"/>
+<circle class="glow" cx="260" cy="244" r="54" fill="url(#kpA-g)"/>
+<g class="float"><polygon points="218,262 260,274 260,244 218,232" fill="#F4F1E6" stroke="#C2A264"/><polygon points="260,274 302,262 302,232 260,244" fill="#F4F1E6" stroke="#C2A264"/>
+<path d="M226 244 L250 251 M226 251 L250 258 M226 258 L244 263 M270 251 L294 244 M270 258 L294 251 M276 263 L294 258" stroke="#C2A264" stroke-width=".9"/></g>
+<ellipse cx="214" cy="258" rx="12" ry="9" fill="#1A3E36" stroke="#8FA79C" stroke-opacity=".55"/><ellipse cx="306" cy="258" rx="12" ry="9" fill="#1A3E36" stroke="#8FA79C" stroke-opacity=".55"/>
+<circle class="spark" cx="246" cy="230" r="1.4"/><circle class="spark" cx="274" cy="226" r="1.4" style="animation-delay:.9s"/><circle class="spark" cx="260" cy="236" r="1.4" style="animation-delay:1.8s"/>
+</svg>
+    </div>
+    <h2 class="eyebrow">Contact · The Keeper speaks</h2>
+    <blockquote id="keeper-line">A report nobody can trace is an opinion with a chart.</blockquote>
+    <p class="sub">Got a question about data that needs an owner? Always happy to talk catalogs, lineage, and the practical side of owning data at scale.</p>
+    <div class="actions">
+      <a class="primary" href="mailto:hello@psychrun.com?subject=A%20question%20for%20the%20Keeper">Ask the Keeper</a>
+      <a class="ghost" href="https://www.linkedin.com/in/PSYCHRUN" rel="me noopener" target="_blank">Connect on LinkedIn</a>
+    </div>
+    <a class="mail" href="mailto:hello@psychrun.com">hello@psychrun.com</a>
+  </div>
+  <footer>
+    <span>Saikiran Chennuri, Hyderabad</span>
+    <span>psychrun.com · Updated Nov 2026</span>
+    <a href="/story/">How I got here, told as a story &rarr;</a>
+  </footer>
+</section>
+<script>
+/* The Keeper's line in the closing band rotates through four sayings (still when motion is reduced). */
+(function () {
+  var el = document.getElementById('keeper-line');
+  if (!el || (window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches)) return;
+  var lines = [
+    'A report nobody can trace is an opinion with a chart.',
+    'Every number downstream deserves a path back.',
+    'When everyone is responsible, no one is accountable.',
+    'Name what you know. Name what you don’t.'
+  ], i = 0;
+  setInterval(function () {
+    el.style.opacity = 0;
+    setTimeout(function () { i = (i + 1) % lines.length; el.textContent = lines[i]; el.style.opacity = 1; }, 350);
+  }, 6000);
+})();
+</script>
 <script>
 /* Live Hyderabad sky: the hero scene follows the real time in Hyderabad (IST, no daylight saving).
    Testing: ?sky=night|dawn|day|dusk forces a phase, ?time=18:05 forces a time. */
@@ -556,197 +704,6 @@
   update();
   if (!force && !forceTime) setInterval(update, 60000);
 })();
-</script>
-<!-- psychrun.com · "Ask the Keeper" pop-up
-     Paste just before </body> in index.html.
-     Shows once per visitor: after they scroll halfway, or when they move to leave the tab (desktop).
-     Preview anytime: https://psychrun.com/?keeper
-     The illustration is its own drawing (the Keeper up close, a question mark in the stars). -->
-<style>
-  #keeper-overlay{
-    position:fixed;inset:0;z-index:9999;padding:16px;
-    display:flex;align-items:center;justify-content:center;
-    background:rgba(8,20,17,.62);backdrop-filter:blur(3px);-webkit-backdrop-filter:blur(3px);
-    opacity:0;visibility:hidden;transition:opacity .4s ease,visibility 0s linear .4s;
-  }
-  #keeper-overlay.show{opacity:1;visibility:visible;transition:opacity .4s ease}
-
-  #keeper{
-    position:relative;overflow:hidden;width:100%;max-width:440px;box-sizing:border-box;
-    max-height:calc(100vh - 32px);overflow-y:auto;
-    border-radius:18px;padding:8px 26px 26px;text-align:center;
-    color:#F4F1E6;background:#12302A;
-    box-shadow:0 24px 70px rgba(0,0,0,.45),inset 0 0 0 1px rgba(194,162,100,.3);
-    transform:translateY(18px) scale(.97);transition:transform .55s cubic-bezier(.2,.8,.2,1);
-  }
-  #keeper-overlay.show #keeper{transform:none}
-
-  /* the illustration */
-  #keeper .keeper-art{display:block;width:calc(100% + 52px);margin:0 -26px 4px}
-  #keeper .keeper-art svg{display:block;width:100%;height:auto;max-height:36vh}
-#keeper .kp .star{fill:#DCE6E0;animation:kp-tw 4s ease-in-out infinite}
-#keeper .kp .cstar{fill:#E2C482}
-#keeper .kp .cline{stroke:#C2A264;stroke-opacity:.6;stroke-width:1;fill:none;stroke-dasharray:140;stroke-dashoffset:140;animation:kp-draw 1.2s ease forwards}
-#keeper .kp .glow{animation:kp-glow 3.4s ease-in-out infinite;transform-box:fill-box;transform-origin:center}
-#keeper .kp .eye{fill:#E2C482;animation:kp-blink 6s infinite;transform-box:fill-box;transform-origin:center}
-#keeper .kp .float{animation:kp-float 5s ease-in-out infinite}
-#keeper .kp .spark{fill:#F1DDAE;opacity:0;animation:kp-spark 2.8s ease-in-out infinite}
-@keyframes kp-tw{50%{opacity:.25}}
-@keyframes kp-draw{to{stroke-dashoffset:0}}
-@keyframes kp-glow{50%{opacity:.6;transform:scale(1.08)}}
-@keyframes kp-blink{0%,92%,100%{transform:scaleY(1)}95%{transform:scaleY(.1)}}
-@keyframes kp-float{50%{transform:translateY(-3px)}}
-@keyframes kp-spark{0%{opacity:0;transform:translateY(0)}40%{opacity:1}100%{opacity:0;transform:translateY(-18px)}}
-@media (prefers-reduced-motion:reduce){#keeper .kp *{animation:none!important}#keeper .kp .cline{stroke-dashoffset:0}}
-
-  #keeper .eyebrow{
-    margin:0 0 10px;font:600 11px/1 var(--sans,"Manrope",system-ui,sans-serif);
-    letter-spacing:.2em;text-transform:uppercase;color:#C2A264;
-  }
-  #keeper blockquote{
-    margin:0 auto 10px;max-width:340px;min-height:2.5em;
-    font-family:var(--display,"Cormorant Garamond",Georgia,serif);font-style:italic;font-weight:500;
-    font-size:25px;line-height:1.25;text-wrap:balance;transition:opacity .35s ease;
-  }
-  #keeper .sub{
-    margin:0 0 22px;font:400 14px/1.5 var(--sans,"Manrope",system-ui,sans-serif);color:#8FA79C;
-  }
-  #keeper .actions{display:flex;gap:10px;justify-content:center;flex-wrap:wrap}
-  #keeper .actions a{
-    font:600 14px/1 var(--sans,"Manrope",system-ui,sans-serif);text-decoration:none;
-    padding:13px 20px;border-radius:999px;transition:transform .15s ease,background .15s ease;
-  }
-  #keeper .actions a:hover{transform:translateY(-1px)}
-  #keeper .primary{background:#C2A264;color:#12302A}
-  #keeper .primary:hover{background:#D3B577}
-  #keeper .ghost{color:#F4F1E6;box-shadow:inset 0 0 0 1px rgba(244,241,230,.35)}
-  #keeper .ghost:hover{background:rgba(244,241,230,.07)}
-
-  #keeper-close{
-    position:absolute;top:10px;right:12px;z-index:2;width:36px;height:36px;
-    border:0;border-radius:50%;background:rgba(18,48,42,.6);cursor:pointer;
-    color:#DCE6E0;font-size:24px;line-height:36px;
-  }
-  #keeper-close:hover{color:#fff;background:rgba(18,48,42,.9)}
-
-  @media (prefers-reduced-motion:reduce){
-    #keeper-overlay,#keeper,#keeper blockquote{transition:none}
-  }
-</style>
-
-<div id="keeper-overlay" role="dialog" aria-modal="true" aria-labelledby="keeper-line">
-  <div id="keeper">
-    <button id="keeper-close" aria-label="Close">&times;</button>
-    <div class="keeper-art">
-<svg class="kp" viewBox="0 0 520 300" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-<defs><radialGradient id="kpA-g"><stop offset="0" stop-color="#E8C989" stop-opacity=".8"/><stop offset=".5" stop-color="#C2A264" stop-opacity=".2"/><stop offset="1" stop-color="#C2A264" stop-opacity="0"/></radialGradient>
-<linearGradient id="kpA-fg" x1="0" y1="0" x2="0" y2="1"><stop offset=".7" stop-color="#fff"/><stop offset="1" stop-color="#000"/></linearGradient><mask id="kpA-m" maskUnits="userSpaceOnUse" x="0" y="0" width="520" height="300"><rect width="520" height="300" fill="url(#kpA-fg)"/></mask></defs>
-<circle class="star" cx="172" cy="37" r="0.8" style="animation-delay:0.3s"/>
-<circle class="star" cx="278" cy="78" r="0.8" style="animation-delay:3.2s"/>
-<circle class="star" cx="117" cy="25" r="1.4" style="animation-delay:0.2s"/>
-<circle class="star" cx="55" cy="90" r="0.8" style="animation-delay:3.3s"/>
-<circle class="star" cx="41" cy="120" r="0.8" style="animation-delay:3.4s"/>
-<circle class="star" cx="33" cy="173" r="1.2" style="animation-delay:1.5s"/>
-<circle class="star" cx="62" cy="118" r="1" style="animation-delay:1.3s"/>
-<circle class="star" cx="284" cy="20" r="0.8" style="animation-delay:2.2s"/>
-<circle class="star" cx="399" cy="97" r="1.4" style="animation-delay:1.3s"/>
-<circle class="star" cx="134" cy="43" r="1" style="animation-delay:0.3s"/>
-<circle class="star" cx="160" cy="103" r="1.2" style="animation-delay:2.6s"/>
-<circle class="star" cx="154" cy="196" r="0.8" style="animation-delay:1.8s"/>
-<circle class="star" cx="92" cy="74" r="1.4" style="animation-delay:1.5s"/>
-<circle class="star" cx="491" cy="23" r="1.2" style="animation-delay:1.2s"/>
-<circle class="star" cx="408" cy="21" r="0.8" style="animation-delay:3.3s"/>
-<circle class="star" cx="40" cy="143" r="1.4" style="animation-delay:1.0s"/>
-<circle class="star" cx="21" cy="97" r="1" style="animation-delay:2.1s"/>
-<circle class="star" cx="257" cy="50" r="1.2" style="animation-delay:0.5s"/>
-<circle class="star" cx="134" cy="83" r="1.4" style="animation-delay:0.3s"/>
-<circle class="star" cx="452" cy="165" r="1.2" style="animation-delay:2.5s"/>
-<circle class="star" cx="503" cy="139" r="1.4" style="animation-delay:3.4s"/>
-<circle class="star" cx="85" cy="42" r="1" style="animation-delay:2.3s"/>
-<circle class="star" cx="16" cy="168" r="1" style="animation-delay:0.9s"/>
-<circle class="star" cx="12" cy="88" r="1.2" style="animation-delay:2.1s"/>
-<circle class="star" cx="169" cy="32" r="0.8" style="animation-delay:1.6s"/>
-<circle class="star" cx="445" cy="191" r="1.4" style="animation-delay:1.4s"/>
-<line class="cline" x1="96" y1="58" x2="116" y2="40" style="animation-delay:0.30s"/>
-<line class="cline" x1="116" y1="40" x2="142" y2="40" style="animation-delay:0.52s"/>
-<line class="cline" x1="142" y1="40" x2="158" y2="58" style="animation-delay:0.74s"/>
-<line class="cline" x1="158" y1="58" x2="152" y2="80" style="animation-delay:0.96s"/>
-<line class="cline" x1="152" y1="80" x2="130" y2="94" style="animation-delay:1.18s"/>
-<line class="cline" x1="130" y1="94" x2="126" y2="116" style="animation-delay:1.40s"/>
-<circle class="cstar" cx="96" cy="58" r="2.2"/>
-<circle class="cstar" cx="116" cy="40" r="2.2"/>
-<circle class="cstar" cx="142" cy="40" r="2.2"/>
-<circle class="cstar" cx="158" cy="58" r="2.2"/>
-<circle class="cstar" cx="152" cy="80" r="2.2"/>
-<circle class="cstar" cx="130" cy="94" r="2.2"/>
-<circle class="cstar" cx="126" cy="116" r="2.2"/><circle class="cstar" cx="125" cy="140" r="3"/>
-<path d="M150 150 C 190 185, 215 215, 236 244" fill="none" stroke="#C2A264" stroke-opacity=".35" stroke-dasharray="2 5"/>
-<g mask="url(#kpA-m)">
-<path d="M170 300 C 172 230 190 150 260 112 C 330 150 348 230 350 300 Z" fill="#1A3E36" stroke="#8FA79C" stroke-opacity=".55"/>
-<path d="M214 300 C 220 250 232 222 260 214 C 288 222 300 250 306 300" fill="none" stroke="#8FA79C" stroke-opacity=".3"/>
-</g>
-<ellipse cx="260" cy="182" rx="30" ry="38" fill="#0A1C18"/>
-<circle class="eye" cx="249" cy="180" r="2.2"/><circle class="eye" cx="271" cy="180" r="2.2"/>
-<circle class="glow" cx="260" cy="244" r="54" fill="url(#kpA-g)"/>
-<g class="float"><polygon points="218,262 260,274 260,244 218,232" fill="#F4F1E6" stroke="#C2A264"/><polygon points="260,274 302,262 302,232 260,244" fill="#F4F1E6" stroke="#C2A264"/>
-<path d="M226 244 L250 251 M226 251 L250 258 M226 258 L244 263 M270 251 L294 244 M270 258 L294 251 M276 263 L294 258" stroke="#C2A264" stroke-width=".9"/></g>
-<ellipse cx="214" cy="258" rx="12" ry="9" fill="#1A3E36" stroke="#8FA79C" stroke-opacity=".55"/><ellipse cx="306" cy="258" rx="12" ry="9" fill="#1A3E36" stroke="#8FA79C" stroke-opacity=".55"/>
-<circle class="spark" cx="246" cy="230" r="1.4"/><circle class="spark" cx="274" cy="226" r="1.4" style="animation-delay:.9s"/><circle class="spark" cx="260" cy="236" r="1.4" style="animation-delay:1.8s"/>
-</svg>
-</div>
-    <p class="eyebrow">The Keeper speaks</p>
-    <blockquote id="keeper-line">A report nobody can trace is an opinion with a chart.</blockquote>
-    <p class="sub">Got a question about data that needs an owner?</p>
-    <div class="actions">
-      <a class="primary" href="mailto:hello@psychrun.com?subject=A%20question%20for%20the%20Keeper">Ask the Keeper</a>
-      <a class="ghost" href="https://www.linkedin.com/in/PSYCHRUN" target="_blank" rel="noopener">Connect on LinkedIn</a>
-    </div>
-  </div>
-</div>
-
-<script>
-  (function () {
-    var KEY = 'keeper-seen-v1';                         // bump to v2 to show it to everyone again
-    var FORCE = /[?&]keeper\b/.test(location.search);   // ?keeper on the URL previews it anytime
-
-    var seen = false;
-    try { seen = localStorage.getItem(KEY) === '1'; } catch (e) {}
-    if (seen && !FORCE) return;
-
-    var overlay = document.getElementById('keeper-overlay');
-    var lineEl = document.getElementById('keeper-line');
-    var lines = [
-      'A report nobody can trace is an opinion with a chart.',
-      'Every number downstream deserves a path back.',
-      'When everyone is responsible, no one is accountable.',
-      'Name what you know. Name what you don’t.'
-    ];
-
-    var shown = false, rotator;
-    function open() {
-      if (shown) return;
-      shown = true;
-      overlay.classList.add('show');
-      var i = 0;
-      rotator = setInterval(function () {
-        lineEl.style.opacity = 0;
-        setTimeout(function () { i = (i + 1) % lines.length; lineEl.textContent = lines[i]; lineEl.style.opacity = 1; }, 350);
-      }, 4500);
-      try { localStorage.setItem(KEY, '1'); } catch (e) {}
-    }
-    function close() { overlay.classList.remove('show'); clearInterval(rotator); }
-
-    if (FORCE) setTimeout(open, 400);
-    window.addEventListener('scroll', function () {
-      var h = document.documentElement;
-      if ((h.scrollTop + innerHeight) / h.scrollHeight > 0.5) open();
-    }, { passive: true });
-    document.addEventListener('mouseout', function (e) { if (!e.relatedTarget && e.clientY < 10) open(); });
-
-    document.getElementById('keeper-close').addEventListener('click', close);
-    overlay.addEventListener('click', function (e) { if (e.target === overlay) close(); });
-    document.addEventListener('keydown', function (e) { if (e.key === 'Escape' && shown) close(); });
-  })();
 </script>
 
 </body>
